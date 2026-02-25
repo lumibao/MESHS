@@ -1,0 +1,2592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maximo Estrella Senior High School | Official Website</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+
+<style>
+:root{
+  --g:#15803d;--gd:#052e16;--gl:#d1fae5;
+  --gold:#fbbf24;--ga:#d97706;
+  --easing:cubic-bezier(0.4,0,0.2,1);
+}
+*{box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:#f9fafb;overflow-x:hidden}
+.font-lora{font-family:'Lora',serif}
+.font-cinzel{font-family:'Cinzel',serif}
+
+/* ── PAGE TRANSITION ─────────────────── */
+@keyframes pageIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.page-enter{animation:pageIn .45s var(--easing) forwards}
+
+/* ── HERO STAGGER ──────────────────────*/
+@keyframes heroSlide{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.h1{animation:heroSlide .7s .1s both}
+.h2{animation:heroSlide .7s .3s both}
+.h3{animation:heroSlide .7s .5s both}
+.h4{animation:heroSlide .7s .7s both}
+.h5{animation:heroSlide .7s .9s both}
+
+/* ── SCROLL REVEAL ─────────────────────*/
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--easing),transform .7s var(--easing)}
+.reveal.in{opacity:1;transform:none}
+.reveal-l{opacity:0;transform:translateX(-28px);transition:opacity .7s var(--easing),transform .7s var(--easing)}
+.reveal-l.in{opacity:1;transform:none}
+.reveal-r{opacity:0;transform:translateX(28px);transition:opacity .7s var(--easing),transform .7s var(--easing)}
+.reveal-r.in{opacity:1;transform:none}
+
+/* ── RIPPLE BUTTON ─────────────────────*/
+.btn-ripple{position:relative;overflow:hidden;transform:translateZ(0)}
+.btn-ripple:after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.2);transform:scale(0);border-radius:50%;transition:transform .4s,opacity .4s}
+.btn-ripple:active:after{transform:scale(4);opacity:0;transition:0s}
+
+/* ── CARD HOVER ────────────────────────*/
+.card-hover{transition:transform .3s var(--easing),box-shadow .3s var(--easing)}
+.card-hover:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(5,46,22,.12)}
+
+/* ── NAV LINK ──────────────────────────*/
+.nav-link{position:relative}
+.nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--gold);transition:width .3s var(--easing)}
+.nav-link:hover::after,.nav-link.active::after{width:100%}
+
+/* ── LOGO PULSE ────────────────────────*/
+@keyframes logoPulse{0%,100%{box-shadow:0 0 0 0 rgba(251,191,36,.4)}50%{box-shadow:0 0 0 8px rgba(251,191,36,0)}}
+.logo-ring{animation:logoPulse 3s infinite}
+
+/* ── MODAL ENTER ───────────────────────*/
+@keyframes modalIn{from{opacity:0;transform:scale(.94) translateY(12px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.modal-content{animation:modalIn .3s var(--easing) forwards}
+
+/* ── COUNTER ───────────────────────────*/
+@keyframes countUp{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+.count-in{animation:countUp .5s var(--easing) forwards}
+
+/* ── SKELETON ──────────────────────────*/
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+.skeleton{background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.5s infinite}
+
+/* ── SCROLLBAR ─────────────────────────*/
+::-webkit-scrollbar{width:7px}
+::-webkit-scrollbar-track{background:#f1f1f1}
+::-webkit-scrollbar-thumb{background:var(--g);border-radius:4px}
+
+/* ── TOOLTIP ───────────────────────────*/
+[title]:hover::before{content:attr(title);position:absolute;bottom:110%;left:50%;transform:translateX(-50%);background:#1f2937;color:#fff;font-size:11px;padding:3px 8px;border-radius:6px;white-space:nowrap;pointer-events:none;z-index:99}
+
+/* ── LIVE PULSE ────────────────────────*/
+@keyframes live{0%,100%{opacity:1}50%{opacity:.3}}
+.live{animation:live 1.4s infinite}
+
+/* ── FLOAT ─────────────────────────────*/
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.float{animation:float 4s ease-in-out infinite}
+
+/* ── HERO VIDEO/IMG ────────────────────*/
+.hero-media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(5,46,22,.82),rgba(21,128,61,.45));z-index:1}
+.hero-content{position:relative;z-index:2}
+
+/* ── INPUT FOCUS ───────────────────────*/
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--g)!important;box-shadow:0 0 0 3px rgba(21,128,61,.15)}
+
+/* ── TOGGLE ────────────────────────────*/
+.tog{transition:background .25s}
+
+/* ── PHOTO GRID ────────────────────────*/
+.photo-grid-1{grid-template-columns:1fr}
+.photo-grid-2{grid-template-columns:1fr 1fr}
+.photo-grid-3{grid-template-columns:1fr 1fr;grid-template-rows:auto auto}
+.photo-grid-3 .photo-main{grid-column:1/-1}
+.photo-grid-4,.photo-grid-5,.photo-grid-6,.photo-grid-7,.photo-grid-8,.photo-grid-9,.photo-grid-10{grid-template-columns:repeat(3,1fr)}
+
+/* ── LIGHTBOX ──────────────────────────*/
+@keyframes lbIn{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+.lb-img{animation:lbIn .2s var(--easing)}
+
+/* ── MOBILE NAV ────────────────────────*/
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+.mobile-menu{animation:slideDown .25s var(--easing)}
+
+/* ── BADGE ─────────────────────────────*/
+@keyframes badgePop{0%{transform:scale(0)}70%{transform:scale(1.2)}100%{transform:scale(1)}}
+.badge-pop{animation:badgePop .3s var(--easing)}
+
+/* ── TABLE ─────────────────────────────*/
+table{border-collapse:collapse}
+
+/* ── RICH INPUT UPLOAD ─────────────────*/
+.upload-zone{border:2px dashed #d1d5db;transition:border-color .2s,background .2s}
+.upload-zone:hover{border-color:var(--g);background:rgba(21,128,61,.03)}
+
+/* ── IMAGE LIGHT BOX ───────────────────*/
+#lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;align-items:center;justify-content:center}
+#lightbox.open{display:flex}
+
+/* ── CROPPER OVERRIDES ─────────────────*/
+.cropper-container{max-height:60vh!important}
+.cropper-view-box,.cropper-face{border-radius:0}
+</style>
+
+<script>tailwind.config={theme:{extend:{colors:{g:'#15803d',gd:'#052e16',gold:'#fbbf24',ga:'#d97706'}}}}</script>
+</head>
+<body>
+<div id="root"></div>
+
+<!-- Lightbox -->
+<div id="lightbox" onclick="this.classList.remove('open')">
+  <img id="lb-img" src="" class="lb-img max-h-screen max-w-screen-lg object-contain rounded-xl shadow-2xl" style="max-height:90vh;max-width:90vw"/>
+  <button onclick="document.getElementById('lightbox').classList.remove('open')" style="position:absolute;top:20px;right:20px;background:rgba(255,255,255,.2);border:none;color:#fff;width:42px;height:42px;border-radius:50%;font-size:20px;cursor:pointer;">✕</button>
+</div>
+
+<script type="text/babel">
+const {useState,useEffect,useRef,useCallback,useMemo}=React;
+
+/* ════════════════════════════════════════
+   UTILITIES
+════════════════════════════════════════ */
+const ls=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch{return d}};
+const ss=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));return true;}catch(e){return false;}};
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+
+/* ════════════════════════════════════════
+   ☁  FIREBASE CLOUD SYNC  v3 — LIVE POLLING
+   ─────────────────────────────────────────
+   How it works:
+   • On load  → fetch all data from Firebase once
+   • Every 5s → check a tiny "_version" timestamp on Firebase
+                If it changed, pull all data immediately → all
+                phones/tabs update automatically within 5 seconds
+   • On save  → write to Firebase + bump _version so every other
+                device knows to re-fetch right away
+   • Tab hidden → polling pauses to save battery/data
+════════════════════════════════════════ */
+// ── Permanent Firebase URL — hardcoded, always connected ────────────
+const FIREBASE_URL='https://meshs-website-default-rtdb.asia-southeast1.firebasedatabase.app';
+let _fbUrl=(()=>{
+  try{
+    localStorage.setItem('meshsFbUrl',FIREBASE_URL);
+    return FIREBASE_URL;
+  }catch{return FIREBASE_URL;}
+})();
+const isCloud=()=>!!_fbUrl;
+
+// ── Sync status broadcast ────────────────────────────────────────────
+let _syncSubs=[];
+let _syncState='idle';
+const setSyncState=s=>{_syncState=s;_syncSubs.forEach(f=>f(s));};
+
+// ── Live-poll subscribers (App registers its state setters here) ─────
+let _liveCallback=null;          // fn({settings,clubs,seminars,elections,accounts})
+let _lastVersion=0;              // last _version value we saw from Firebase
+let _pollTimer=null;
+let _isPolling=false;
+
+// ── Low-level GET ────────────────────────────────────────────────────
+const fbGet=async key=>{
+  if(!isCloud())return null;
+  try{
+    const r=await Promise.race([
+      fetch(`${_fbUrl}/meshsData/${key}.json`),
+      new Promise((_,rej)=>setTimeout(()=>rej(new Error('to')),12000)),
+    ]);
+    if(!r.ok)return null;
+    return await r.json();
+  }catch{return null;}
+};
+
+// ── Fetch ALL data keys at once ──────────────────────────────────────
+const SYNC_KEYS=['meshsSettings2','meshsClubs2','meshsSeminars2','meshsElections2','meshsAccounts2'];
+const fbFetchAll=async()=>{
+  const results=await Promise.all(SYNC_KEYS.map(k=>fbGet(k)));
+  return{
+    settings:results[0],clubs:results[1],seminars:results[2],
+    elections:results[3],accounts:results[4],
+  };
+};
+
+// ── Low-level save (debounced) + bumps _version ──────────────────────
+const _fbTimers={};
+const fbSave=(key,val)=>{
+  if(!isCloud())return;
+  clearTimeout(_fbTimers[key]);
+  setSyncState('saving');
+  _fbTimers[key]=setTimeout(async()=>{
+    try{
+      const r=await Promise.race([
+        fetch(`${_fbUrl}/meshsData/${key}.json`,{
+          method:'PUT',headers:{'Content-Type':'application/json'},
+          body:JSON.stringify(val),
+        }),
+        new Promise((_,rej)=>setTimeout(()=>rej(new Error('to')),20000)),
+      ]);
+      if(r.ok){
+        setSyncState('live');
+        // Bump _version so every other device polls and re-fetches
+        fetch(`${_fbUrl}/meshsData/_version.json`,{
+          method:'PUT',headers:{'Content-Type':'application/json'},
+          body:JSON.stringify(Date.now()),
+        }).catch(()=>{});
+      }else{setSyncState('error');}
+    }catch{setSyncState('error');}
+  },1500);
+};
+
+// ── Live polling: checks _version every 5 s ──────────────────────────
+const fbStartPolling=callback=>{
+  _liveCallback=callback;
+  if(_isPolling)return;
+  _isPolling=true;
+
+  const poll=async()=>{
+    if(!isCloud()||document.hidden)return;
+    try{
+      const r=await fetch(`${_fbUrl}/meshsData/_version.json`);
+      if(!r.ok)return;
+      const v=await r.json();
+      // v is a number (timestamp). If it's newer than what we last saw,
+      // pull everything and push to React state.
+      if(v&&v>_lastVersion){
+        _lastVersion=v;
+        setSyncState('loading');
+        const data=await fbFetchAll();
+        if(_liveCallback)_liveCallback(data);
+        setSyncState('live');
+      }
+    }catch{}
+  };
+
+  // Poll every 5 seconds; pause when tab is hidden
+  _pollTimer=setInterval(poll,5000);
+  document.addEventListener('visibilitychange',()=>{
+    if(!document.hidden)poll(); // immediate check when tab becomes visible again
+  });
+};
+
+const fbStopPolling=()=>{
+  clearInterval(_pollTimer);
+  _isPolling=false;
+  _liveCallback=null;
+};
+
+// ── Test connection ──────────────────────────────────────────────────
+const fbTest=async url=>{
+  try{
+    const r=await Promise.race([
+      fetch(`${url}/meshsData/_test.json`,{
+        method:'PUT',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({connected:true,app:'MESHS',ts:Date.now()}),
+      }),
+      new Promise((_,rej)=>setTimeout(()=>rej(new Error('to')),10000)),
+    ]);
+    return r.ok;
+  }catch{return false;}
+};
+
+// ── Force-push all local state ───────────────────────────────────────
+const fbPushAll=async data=>{
+  if(!isCloud())return false;
+  setSyncState('saving');
+  try{
+    await Promise.all(Object.entries(data).map(([k,v])=>
+      fetch(`${_fbUrl}/meshsData/${k}.json`,{
+        method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(v),
+      })
+    ));
+    // Bump version so viewers immediately see the pushed data
+    await fetch(`${_fbUrl}/meshsData/_version.json`,{
+      method:'PUT',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(Date.now()),
+    });
+    setSyncState('live');
+    return true;
+  }catch{setSyncState('error');return false;}
+};
+
+// ── React hook for sync status ───────────────────────────────────────
+const useSyncStatus=()=>{
+  const [st,setSt]=useState(_syncState);
+  useEffect(()=>{
+    _syncSubs.push(setSt);
+    return()=>{_syncSubs=_syncSubs.filter(f=>f!==setSt);};
+  },[]);
+  return st;
+};
+
+/* ── Sync Status Badge ── */
+const SyncBadge=()=>{
+  const st=useSyncStatus();
+  if(!isCloud())return null;
+  const map={
+    idle:   {ic:'fa-cloud',         col:'#9ca3af',bg:'#f9fafb',tx:'Cloud Ready',   pulse:false},
+    loading:{ic:'fa-cloud-arrow-down',col:'#3b82f6',bg:'#eff6ff',tx:'Syncing…',    pulse:true},
+    saving: {ic:'fa-cloud-arrow-up', col:'#d97706',bg:'#fffbeb',tx:'Saving…',      pulse:true},
+    live:   {ic:'fa-cloud-check',    col:'#15803d',bg:'#f0fdf4',tx:'Live Sync ●',  pulse:false},
+    error:  {ic:'fa-cloud-slash',    col:'#dc2626',bg:'#fef2f2',tx:'Sync Error',   pulse:false},
+  };
+  const c=map[st]||map.idle;
+  return(
+    <div style={{
+      position:'fixed',bottom:16,left:16,zIndex:999,display:'flex',alignItems:'center',gap:7,
+      background:c.bg,border:`1.5px solid ${c.col}44`,borderRadius:20,padding:'6px 14px 6px 11px',
+      boxShadow:'0 2px 12px rgba(0,0,0,.1)',fontFamily:"'DM Sans',sans-serif",
+      fontSize:12,fontWeight:700,color:c.col,letterSpacing:.2,transition:'all .3s',
+    }}>
+      <i className={`fa-solid ${c.ic}${c.pulse?' fa-bounce':''}`} style={{fontSize:13}}></i>
+      <span>{c.tx}</span>
+      {st==='live'&&<span style={{display:'inline-block',width:7,height:7,borderRadius:'50%',background:'#15803d',animation:'live 1.4s infinite',marginLeft:2}}></span>}
+    </div>
+  );
+};
+
+const timeAgo=ts=>{
+  const diff=Date.now()-ts,m=Math.floor(diff/60000),h=Math.floor(diff/3600000),d=Math.floor(diff/86400000);
+  if(m<1)return 'Just now';
+  if(m<60)return `${m} min${m>1?'s':''} ago`;
+  if(h<24)return `${h} hr${h>1?'s':''} ago`;
+  if(d<7)return `${d} day${d>1?'s':''} ago`;
+  return new Date(ts).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+};
+
+const compressImg=(file,maxW=900,q=0.72)=>new Promise(res=>{
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const img=new Image();
+    img.onload=()=>{
+      const c=document.createElement('canvas');
+      let w=img.width,h=img.height;
+      if(w>maxW){h=Math.round(h*maxW/w);w=maxW;}
+      c.width=w;c.height=h;
+      c.getContext('2d').drawImage(img,0,0,w,h);
+      res(c.toDataURL('image/jpeg',q));
+    };
+    img.src=e.target.result;
+  };
+  reader.readAsDataURL(file);
+});
+
+// For hero backgrounds — compress very aggressively so it fits in localStorage
+const compressHero=(file)=>new Promise(res=>{
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const img=new Image();
+    img.onload=()=>{
+      const c=document.createElement('canvas');
+      const maxW=1280;
+      let w=img.width,h=img.height;
+      if(w>maxW){h=Math.round(h*maxW/w);w=maxW;}
+      c.width=w;c.height=h;
+      c.getContext('2d').drawImage(img,0,0,w,h);
+      // Try progressively lower quality until it fits under 1.2MB
+      let q=0.65;
+      let data=c.toDataURL('image/jpeg',q);
+      while(data.length>1400000&&q>0.2){q-=0.08;data=c.toDataURL('image/jpeg',q);}
+      res(data);
+    };
+    img.src=e.target.result;
+  };
+  reader.readAsDataURL(file);
+});
+
+const openLightbox=src=>{
+  const lb=document.getElementById('lightbox');
+  document.getElementById('lb-img').src=src;
+  lb.classList.add('open');
+};
+
+/* ════════════════════════════════════════
+   DEFAULT DATA
+════════════════════════════════════════ */
+const DEFAULT_TEXT={
+  heroEst:'Est. 2016 · Makati City',
+  heroTitle:'Maximo Estrella\nSenior High School',
+  heroTagline:'"Molding Excellent Students with Honor and Self-discipline"',
+  stat1Val:'100%',stat1Lbl:'Passing Rate',
+  stat2Val:'50+',stat2Lbl:'School Clubs',
+  stat3Val:'2,500+',stat3Lbl:'Graduates',
+  stat4Val:'4',stat4Lbl:'Career Paths',
+  whyTitle:'Why MESHS?',
+  whyBody:'At MESHS, learning extends beyond the four walls of the classroom, guided by excellent teachers who help students develop talents across academics and vibrant school clubs.',
+  feat1:'Excellent Teachers',feat2:'Festival of Talents',feat3:'Community Based',feat4:'Moral Leadership',
+  aboutTitle:'About Our School',aboutSub:'Established 2016',
+  aboutBody:'Maximo Estrella Senior High School was established in 2016 to meet the growing need for quality public senior high education in Makati. Named after a figure of dedicated public service, the school carries the mission to develop holistic, excellent individuals.',
+  philosophy:'"Molding Excellent Students with Honor and Self-discipline."',
+  aboutBody2:'Our faculty is composed of highly qualified professionals dedicated to mentorship, academic rigor, and the holistic development of every Estrellian.',
+  programsSub:'A MESHSterpiece of talent and knowledge',
+  careerSub:'Choose the path that ignites your passion',
+  admissionsTagline:'Molding Excellence through Honor and Discipline.',
+  enrollPeriod:'S.Y. 2026-2027',enrollDates:'April 30 — June 10',
+  contactTitle:'Reach Out to Us',
+  contactDesc:'Visit our campus or connect with us digitally. We are here to guide your academic journey.',
+  contactAddr:'3251 J. Magsaysay St., Brgy. Carmona, Makati City',
+  contactPhone:'(02) 8888-1234 / 0917-123-4567',
+  contactEmail:'meshs.official@example.com',
+  footerCopy:'© 2026 Maximo Estrella Senior High School. Official Website.',
+};
+
+const DEFAULT_SETTINGS={
+  logoBase64:null,
+  heroBgBase64:null,
+  heroBgVideoUrl:'',
+  heroBgType:'default',
+  admissionsOpen:true,
+  applyLink:'',
+  siteText:{...DEFAULT_TEXT},
+  announcements:[
+    {id:'ann1',text:'🎓 Enrollment for S.Y. 2026-2027 is now OPEN! Click Admissions to apply.',type:'success',active:true,link:'',ts:Date.now()},
+  ],
+  announcementBar:true,
+};
+
+const CAREER_PATHS=[
+  {id:'ash',code:'ASH',name:'Arts, Social Sciences, and Humanities',color:'bg-purple-700',border:'border-purple-600',light:'bg-purple-50',tx:'text-purple-700',icon:'fa-palette',desc:'Explore creative expression, social understanding, and humanistic inquiry. ASH prepares students for careers in journalism, arts, social work, and education.'},
+  {id:'be',code:'BE',name:'Business and Entrepreneurship',color:'bg-amber-600',border:'border-amber-500',light:'bg-amber-50',tx:'text-amber-700',icon:'fa-briefcase',desc:'Develop entrepreneurial mindset and business acumen. BE prepares students for careers in management, marketing, finance, and entrepreneurship.'},
+  {id:'shw',code:'SHW',name:'Sports, Health, and Wellness',color:'bg-sky-600',border:'border-sky-500',light:'bg-sky-50',tx:'text-sky-700',icon:'fa-dumbbell',desc:'Pursue excellence in physical fitness, health science, and sports. SHW prepares students for careers in coaching, physical education, and wellness.'},
+  {id:'stem',code:'STEM',name:'Science, Technology, Engineering, and Mathematics',color:'bg-gd',border:'border-g',light:'bg-g/10',tx:'text-g',icon:'fa-flask',desc:'Engage in scientific inquiry and technological innovation. STEM prepares students for careers in engineering, medicine, IT, and research.'},
+];
+
+const INIT_CLUBS=[
+  {id:'tala',name:'TALA Publication',icon:'fa-newspaper',color:'bg-emerald-600',fb:'https://www.facebook.com/TALAPublication',logoBase64:null,desc:'The official campus publication of MESHS.',posts:[]},
+  {id:'stem',name:'STEM Club',icon:'fa-microscope',color:'bg-blue-600',fb:'https://www.facebook.com/meshsstemclub',logoBase64:null,desc:'Hub for innovators and critical thinkers.',posts:[]},
+  {id:'abm',name:'ABM Club',icon:'fa-chart-line',color:'bg-amber-600',fb:'https://www.facebook.com/profile.php?id=61551994504922',logoBase64:null,desc:'Empowers the business leaders of tomorrow.',posts:[]},
+  {id:'sports',name:'Sports Club',icon:'fa-basketball',color:'bg-orange-600',fb:'https://www.facebook.com/sportsclubmeshs',logoBase64:null,desc:'Promotes physical wellness and sportsmanship.',posts:[]},
+  {id:'mhac',name:'Mental Health Advocates',icon:'fa-heart',color:'bg-pink-600',fb:'https://www.facebook.com/MESHSMentalHealthAdvocatesClub',logoBase64:null,desc:'Raises awareness about emotional well-being.',posts:[]},
+  {id:'valclub',name:'Campus Values Club',icon:'fa-hands-praying',color:'bg-purple-600',fb:'https://www.facebook.com/profile.php?id=61563364654503',logoBase64:null,desc:'Fostering moral integrity and community service.',posts:[]},
+  {id:'yeso',name:'YESO',icon:'fa-leaf',color:'bg-green-600',fb:'https://www.facebook.com/meshsyeso',logoBase64:null,desc:'Youth for Environment in Schools Organization.',posts:[]},
+  {id:'arts',name:'Performing Arts Club',icon:'fa-masks-theater',color:'bg-rose-600',fb:'https://www.facebook.com/profile.php?id=61554715703366',logoBase64:null,desc:'Showcases creative talents through theater and dance.',posts:[]},
+  {id:'acad',name:'Academic Excellence Club',icon:'fa-graduation-cap',color:'bg-indigo-600',fb:'https://www.facebook.com/profile.php?id=61551915805836',logoBase64:null,desc:'Celebrates and nurtures academic achievers.',posts:[]},
+  {id:'cia',name:'CIA Club',icon:'fa-palette',color:'bg-teal-600',fb:'https://www.facebook.com/MESHScia',logoBase64:null,desc:'Creative, Innovative Arts platform for students.',posts:[]},
+  {id:'sslg',name:'SSLG',icon:'fa-landmark',color:'bg-gray-700',fb:'https://www.facebook.com/meshssslg',logoBase64:null,desc:'Supreme Student and Learner Government of MESHS.',posts:[]},
+];
+
+const INIT_SEMINARS=[
+  {id:'s1',title:'Mental Health & Resilience',date:'Oct 12, 2025',desc:'A holistic seminar on emotional well-being and stress management for the youth.',photos:[],hasLink:false,linkUrl:'',timestamp:Date.now()-86400000*60},
+  {id:'s2',title:'College Career Pathing',date:'Nov 20, 2025',desc:'Guidance counseling and university entrance exam orientation for Grade 12.',photos:[],hasLink:false,linkUrl:'',timestamp:Date.now()-86400000*30},
+  {id:'s3',title:'Leadership & Integrity',date:'Jan 15, 2026',desc:'Developing the core values of honor and self-discipline in future leaders.',photos:[],hasLink:false,linkUrl:'',timestamp:Date.now()-86400000*7},
+];
+
+const INIT_GALLERY=[
+  {id:'g1',src:'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=800',cat:'School Life',caption:'Students at the campus'},
+  {id:'g2',src:'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=800',cat:'Academics',caption:'Science laboratory'},
+  {id:'g3',src:'https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&q=80&w=800',cat:'Events',caption:'Festival of Talents'},
+  {id:'g4',src:'https://images.unsplash.com/photo-1571260899304-425eee4c7efc?auto=format&fit=crop&q=80&w=800',cat:'Sports',caption:'Sports fest highlights'},
+  {id:'g5',src:'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&q=80&w=800',cat:'Academics',caption:'Graduation ceremony'},
+  {id:'g6',src:'https://images.unsplash.com/photo-1581078426770-6d336e5de7bf?auto=format&fit=crop&q=80&w=800',cat:'School Life',caption:'Club activities'},
+  {id:'g7',src:'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=800',cat:'Events',caption:'Recognition day'},
+  {id:'g8',src:'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=800',cat:'Sports',caption:'Basketball intramurals'},
+];
+
+/* ════════════════════════════════════════
+   SHARED UI COMPONENTS
+════════════════════════════════════════ */
+const R=({children,dir='up',delay=0,className=''})=>{
+  const ref=useRef();
+  useEffect(()=>{
+    const cls=dir==='left'?'reveal-l':dir==='right'?'reveal-r':'reveal';
+    const el=ref.current; if(!el) return;
+    el.classList.add(cls);
+    const obs=new IntersectionObserver(([e])=>{if(e.isIntersecting){e.target.classList.add('in');obs.disconnect();}},{threshold:.1});
+    obs.observe(el);
+    return()=>obs.disconnect();
+  },[]);
+  return <div ref={ref} style={{transitionDelay:`${delay}ms`}} className={className}>{children}</div>;
+};
+
+const Btn=({children,onClick,variant='green',size='md',className='',disabled=false,type='button',...p})=>{
+  const base='btn-ripple font-bold rounded-xl transition-all duration-200 inline-flex items-center justify-center gap-2 select-none';
+  const sz={sm:'px-4 py-2 text-sm',md:'px-6 py-3 text-sm',lg:'px-8 py-4 text-base',xl:'px-10 py-4 text-lg'};
+  const v={
+    green:'bg-g hover:bg-gd text-white shadow-lg hover:shadow-xl active:scale-95',
+    gold:'bg-gold hover:bg-yellow-400 text-gd shadow-lg hover:shadow-xl active:scale-95',
+    outline:'border-2 border-white/40 text-white hover:bg-white/10 backdrop-blur active:scale-95',
+    ghost:'bg-gray-100 hover:bg-gray-200 text-gray-700 active:scale-95',
+    danger:'bg-red-500 hover:bg-red-600 text-white active:scale-95',
+    muted:'bg-gray-100 text-gray-500 cursor-not-allowed',
+  };
+  return <button type={type} onClick={onClick} disabled={disabled} className={`${base} ${sz[size]||sz.md} ${disabled?v.muted:v[variant]||v.green} ${className}`} {...p}>{children}</button>;
+};
+
+const Modal=({title,onClose,children,wide=false,noPad=false})=>(
+  <div className="fixed inset-0 z-[200] flex items-end md:items-center justify-center p-0 md:p-4" style={{background:'rgba(0,0,0,.65)',backdropFilter:'blur(4px)'}}>
+    <div className={`modal-content bg-white w-full ${wide?'md:max-w-3xl':'md:max-w-lg'} max-h-[95vh] md:max-h-[90vh] overflow-y-auto md:rounded-2xl rounded-t-2xl shadow-2xl`}>
+      <div className="flex items-center justify-between px-6 py-4 border-b sticky top-0 bg-white z-10 rounded-t-2xl">
+        <h3 className="text-lg font-bold text-gd font-lora">{title}</h3>
+        <button onClick={onClose} className="w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors text-gray-500"><i className="fa-solid fa-xmark"></i></button>
+      </div>
+      <div className={noPad?'':'p-6'}>{children}</div>
+    </div>
+  </div>
+);
+
+const Toggle=({on,onToggle,label=''})=>(
+  <div className="flex items-center gap-3">
+    {label&&<span className="text-sm text-gray-600">{label}</span>}
+    <button onClick={onToggle} className={`tog w-14 h-7 rounded-full relative flex-shrink-0 ${on?'bg-g':'bg-gray-300'}`}>
+      <div className={`w-5 h-5 bg-white rounded-full absolute top-1 shadow transition-all duration-250 ${on?'right-1':'left-1'}`}></div>
+    </button>
+  </div>
+);
+
+const SH=({title,subtitle,light=false})=>(
+  <div className="text-center mb-12">
+    <h2 className={`text-4xl md:text-5xl font-bold mb-4 font-lora ${light?'text-white':'text-gd'}`}>{title}</h2>
+    <div className={`w-20 h-1 mx-auto rounded-full ${light?'bg-gold':'bg-g'}`}></div>
+    {subtitle&&<p className={`mt-4 text-base md:text-lg ${light?'text-gray-300':'text-gray-500'}`}>{subtitle}</p>}
+  </div>
+);
+
+const UploadBtn=({onFile,accept='image/*',label='Upload Photo',icon='fa-image',multiple=false,className='',crop=false,aspect=NaN})=>{
+  const ref=useRef();
+  const [cropSrc,setCropSrc]=useState(null);
+  const [cropAspect]=useState(aspect);
+  const [pendingFile,setPendingFile]=useState(null);
+
+  const handleFiles=async(e)=>{
+    const files=[...e.target.files];
+    if(!files.length) return;
+    if(crop&&!multiple){
+      // Open crop modal for single file
+      const reader=new FileReader();
+      reader.onload=ev=>setCropSrc(ev.target.result);
+      reader.readAsDataURL(files[0]);
+      setPendingFile(files[0]);
+    } else {
+      const results=await Promise.all(files.map(f=>compressImg(f)));
+      onFile(multiple?results:results[0]);
+    }
+    ref.current.value='';
+  };
+
+  const handleCropDone=async(croppedBase64)=>{
+    setCropSrc(null);
+    setPendingFile(null);
+    onFile(croppedBase64);
+  };
+
+  return <>
+    <input ref={ref} type="file" accept={accept} multiple={multiple} className="hidden" onChange={handleFiles}/>
+    <Btn variant="ghost" size="sm" onClick={()=>ref.current.click()} className={className}>
+      <i className={`fa-solid ${icon} text-g`}></i>{label}
+    </Btn>
+    {cropSrc&&<CropModal src={cropSrc} aspect={cropAspect} onDone={handleCropDone} onClose={()=>{setCropSrc(null);setPendingFile(null);}}/>}
+  </>;
+};
+
+/* ── CropModal — fully reorganized with zoom slider ── */
+const CropModal=({src,aspect,onDone,onClose})=>{
+  const imgRef=useRef();
+  const cropperRef=useRef(null);
+  const [ready,setReady]=useState(false);
+  const [loading,setLoading]=useState(false);
+  const [zoom,setZoom]=useState(0);
+
+  useEffect(()=>{
+    if(!imgRef.current) return;
+    const t=setTimeout(()=>{
+      cropperRef.current=new Cropper(imgRef.current,{
+        aspectRatio:isNaN(aspect)?NaN:aspect,
+        viewMode:1,
+        autoCropArea:0.85,
+        movable:true,
+        zoomable:true,
+        rotatable:true,
+        scalable:false,
+        responsive:true,
+        guides:true,
+        center:true,
+        highlight:true,
+        background:true,
+        ready(){setReady(true);},
+        zoom(e){
+          // Keep zoom value in sync for the slider (0–3 range)
+          setZoom(Math.max(0,Math.min(3,e.detail.ratio)));
+        },
+      });
+    },120);
+    return()=>{clearTimeout(t);cropperRef.current?.destroy();};
+  },[]);
+
+  const handleZoomSlider=v=>{
+    setZoom(v);
+    cropperRef.current?.zoomTo(v);
+  };
+
+  const applyCrop=()=>{
+    if(!cropperRef.current||!ready) return;
+    setLoading(true);
+    const canvas=cropperRef.current.getCroppedCanvas({
+      maxWidth:1400,maxHeight:1400,fillColor:'#fff',
+      imageSmoothingEnabled:true,imageSmoothingQuality:'high',
+    });
+    if(!canvas){setLoading(false);return;}
+    const q=canvas.width>900?0.82:0.9;
+    onDone(canvas.toDataURL('image/jpeg',q));
+    setLoading(false);
+  };
+
+  const isSquare=!isNaN(aspect)&&aspect===1;
+  const hint=isNaN(aspect)?'Free crop':'Square crop (1:1)';
+
+  return (
+    <div className="fixed inset-0 z-[300] flex items-center justify-center p-3 md:p-6"
+         style={{background:'rgba(0,0,0,.85)',backdropFilter:'blur(8px)'}}>
+      <div className="modal-content bg-white rounded-2xl shadow-2xl w-full max-w-xl flex flex-col overflow-hidden"
+           style={{maxHeight:'95vh'}}>
+
+        {/* ── Header ── */}
+        <div className="flex items-center justify-between px-5 py-4 border-b bg-white">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 bg-g/10 rounded-xl flex items-center justify-center">
+              <i className="fa-solid fa-crop-simple text-g text-base"></i>
+            </div>
+            <div>
+              <p className="font-bold text-gd text-sm leading-none">Crop Image</p>
+              <p className="text-xs text-gray-400 mt-0.5">{hint} · Drag to reposition</p>
+            </div>
+          </div>
+          <button onClick={onClose}
+                  className="w-9 h-9 rounded-full bg-gray-100 hover:bg-red-50 hover:text-red-500 flex items-center justify-center text-gray-400 transition-colors">
+            <i className="fa-solid fa-xmark text-sm"></i>
+          </button>
+        </div>
+
+        {/* ── Canvas area ── */}
+        <div className="flex-1 bg-gray-950 flex items-center justify-center overflow-hidden"
+             style={{minHeight:'260px',maxHeight:'46vh'}}>
+          <img ref={imgRef} src={src}
+               style={{display:'block',maxWidth:'100%',maxHeight:'100%'}}
+               alt="Crop"/>
+        </div>
+
+        {/* ── Controls ── */}
+        <div className="px-5 py-4 border-t bg-gray-50 space-y-3">
+
+          {/* Zoom row */}
+          <div className="flex items-center gap-3">
+            <span className="text-xs font-bold text-gray-500 w-10 flex-shrink-0">Zoom</span>
+            <button onClick={()=>handleZoomSlider(Math.max(0,zoom-0.1))}
+                    className="w-8 h-8 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-100 flex-shrink-0 transition-colors">
+              <i className="fa-solid fa-minus text-xs"></i>
+            </button>
+            <input type="range" min="0.1" max="3" step="0.05" value={zoom||0.1}
+                   onChange={e=>handleZoomSlider(parseFloat(e.target.value))}
+                   className="flex-1 accent-green-600 h-1.5 rounded-full cursor-pointer"/>
+            <button onClick={()=>handleZoomSlider(Math.min(3,zoom+0.1))}
+                    className="w-8 h-8 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-100 flex-shrink-0 transition-colors">
+              <i className="fa-solid fa-plus text-xs"></i>
+            </button>
+          </div>
+
+          {/* Rotate + action row */}
+          <div className="flex items-center justify-between gap-3">
+            {/* Rotate buttons */}
+            <div className="flex gap-2">
+              <button onClick={()=>cropperRef.current?.rotate(-90)}
+                      className="h-9 px-3 bg-white border border-gray-200 rounded-xl text-gray-600 hover:bg-gray-100 transition-colors flex items-center gap-1.5 text-xs font-bold">
+                <i className="fa-solid fa-rotate-left text-g"></i>Rotate L
+              </button>
+              <button onClick={()=>cropperRef.current?.rotate(90)}
+                      className="h-9 px-3 bg-white border border-gray-200 rounded-xl text-gray-600 hover:bg-gray-100 transition-colors flex items-center gap-1.5 text-xs font-bold">
+                <i className="fa-solid fa-rotate-right text-g"></i>Rotate R
+              </button>
+              <button onClick={()=>{cropperRef.current?.reset();setZoom(0);}}
+                      className="h-9 px-3 bg-white border border-gray-200 rounded-xl text-gray-600 hover:bg-gray-100 transition-colors flex items-center gap-1.5 text-xs font-bold"
+                      title="Reset to original">
+                <i className="fa-solid fa-arrows-rotate text-gray-500"></i>
+              </button>
+            </div>
+            {/* Apply / Cancel */}
+            <div className="flex gap-2">
+              <Btn onClick={onClose} variant="ghost" size="sm">Cancel</Btn>
+              <Btn onClick={applyCrop} disabled={loading||!ready} size="sm">
+                <i className="fa-solid fa-check"></i>
+                {loading?'Applying…':'Apply Crop'}
+              </Btn>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const PhotoGrid=({photos,onRemove})=>{
+  const n=photos.length;
+  if(!n) return null;
+  // Grid layout: 1→1col, 2→2col, 3+→3col
+  const gridClass=n===1?'photo-grid-1':n===2?'photo-grid-2':'photo-grid-4';
+  return (
+    <div className={`grid gap-1 rounded-xl overflow-hidden ${gridClass}`} style={{maxHeight:'480px',overflowY:n>9?'auto':'hidden'}}>
+      {photos.map((p,i)=>(
+        <div key={i} className={`relative overflow-hidden ${n===3&&i===0?'photo-main':''}`} style={{height:n===1?'320px':'160px'}}>
+          <img src={p} className="w-full h-full object-cover cursor-pointer hover:brightness-90 transition-all" onClick={()=>openLightbox(p)} alt=""/>
+          {onRemove&&<button onClick={()=>onRemove(i)} className="absolute top-1.5 right-1.5 w-7 h-7 bg-black/60 text-white rounded-full flex items-center justify-center hover:bg-red-500 transition-colors text-xs"><i className="fa-solid fa-xmark"></i></button>}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+const InlineEdit=({value,onChange,as='span',className='',multiline=false,isAdmin=false,...p})=>{
+  const [editing,setEditing]=useState(false);
+  const [v,setV]=useState(value);
+  useEffect(()=>setV(value),[value]);
+  if(!isAdmin) return as==='span'?<span className={className} {...p}>{value}</span>:<p className={className} {...p}>{value}</p>;
+  if(editing){
+    const save=()=>{onChange(v);setEditing(false);};
+    return multiline
+      ?<textarea autoFocus value={v} onChange={e=>setV(e.target.value)} onBlur={save} className={`${className} border-b-2 border-gold bg-transparent resize-none w-full`} rows={3}/>
+      :<input autoFocus value={v} onChange={e=>setV(e.target.value)} onBlur={save} onKeyDown={e=>e.key==='Enter'&&save()} className={`${className} border-b-2 border-gold bg-transparent`}/>;
+  }
+  return <span onClick={()=>setEditing(true)} className={`${className} cursor-pointer hover:underline decoration-gold underline-offset-2 relative group`} title="Click to edit" {...p}>
+    {value}
+    <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-1 text-gold text-xs align-middle"><i className="fa-solid fa-pen-to-square"></i></span>
+  </span>;
+};
+
+/* ════════════════════════════════════════
+   MESHS LOGO
+════════════════════════════════════════ */
+const Logo=({base64,size=44})=>{
+  if(base64) return <img src={base64} className="rounded-full object-cover logo-ring" style={{width:size,height:size}}/>;
+  return (
+    <svg width={size} height={size} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className="logo-ring rounded-full">
+      <circle cx="50" cy="50" r="49" fill="#fbbf24"/>
+      <polygon points="50,14 61,38 88,38 66,55 74,80 50,64 26,80 34,55 12,38 39,38" fill="#052e16" opacity=".2"/>
+      <polygon points="50,19 59,40 84,40 64,53 71,74 50,62 29,74 36,53 16,40 41,40" fill="#15803d"/>
+      <text x="50" y="57" textAnchor="middle" fill="white" fontSize="18" fontWeight="bold" fontFamily="serif" letterSpacing=".5">ME</text>
+    </svg>
+  );
+};
+
+/* ════════════════════════════════════════
+   ANNOUNCEMENT BAR
+════════════════════════════════════════ */
+const AnnouncementBar=({settings,nav})=>{
+  const anns=(settings.announcements||[]).filter(a=>a.active);
+  const [idx,setIdx]=useState(0);
+  const [dismissed,setDismissed]=useState(false);
+
+  useEffect(()=>{
+    if(anns.length<=1) return;
+    const t=setInterval(()=>setIdx(i=>(i+1)%anns.length),5000);
+    return()=>clearInterval(t);
+  },[anns.length]);
+
+  if(!settings.announcementBar||!anns.length||dismissed) return null;
+
+  const a=anns[idx]||anns[0];
+  const colors={
+    success:'bg-g text-white',
+    warning:'bg-amber-500 text-white',
+    info:'bg-sky-600 text-white',
+    urgent:'bg-red-600 text-white',
+  };
+  const cls=colors[a.type]||colors.success;
+
+  return (
+    <div className={`${cls} text-center text-xs font-bold py-2.5 px-4 relative flex items-center justify-center gap-3 z-[60]`} style={{minHeight:'36px'}}>
+      {anns.length>1&&(
+        <div className="flex gap-1 mr-2">
+          {anns.map((_,i)=><span key={i} onClick={()=>setIdx(i)} className={`w-1.5 h-1.5 rounded-full cursor-pointer transition-all ${i===idx?'bg-white scale-125':'bg-white/50'}`}/>)}
+        </div>
+      )}
+      <span className="flex-1 text-center max-w-3xl mx-auto">
+        {a.text}
+        {a.link&&<button onClick={()=>nav(a.link)} className="ml-3 underline underline-offset-2 opacity-80 hover:opacity-100 whitespace-nowrap">Learn more →</button>}
+      </span>
+      <button onClick={()=>setDismissed(true)} className="absolute right-3 top-1/2 -translate-y-1/2 opacity-60 hover:opacity-100 transition-opacity w-6 h-6 flex items-center justify-center rounded-full hover:bg-black/20">
+        <i className="fa-solid fa-xmark text-xs"></i>
+      </button>
+    </div>
+  );
+};
+
+/* ════════════════════════════════════════
+   NAVBAR
+════════════════════════════════════════ */
+const Navbar=({page,nav,isAdmin,student,onStudentLogout,settings})=>{
+  const [mOpen,setMOpen]=useState(false);
+  const t=settings.siteText||DEFAULT_TEXT;
+
+  const items=[
+    {id:'home',l:'Home'},{id:'programs',l:'Programs'},{id:'careerpaths',l:'Career Paths'},
+    {id:'admissions',l:'Admissions'},{id:'announcements',l:'News & Events'},{id:'gallery',l:'Gallery'},{id:'elections',l:'Elections'},{id:'about',l:'About'},{id:'contact',l:'Contact'},
+  ];
+
+  return (
+    <nav className="w-full z-50 bg-gd shadow-2xl" style={{background:'rgba(5,46,22,.97)',backdropFilter:'blur(12px)'}}>
+      <div className="container mx-auto px-4 md:px-6 flex justify-between items-center h-16">
+        <div onClick={()=>nav('home')} className="flex items-center gap-3 cursor-pointer group">
+          <Logo base64={settings.logoBase64} size={40}/>
+          <div className="text-white">
+            <h1 className="font-bold text-lg leading-none font-lora tracking-wide">MESHS</h1>
+            <p className="text-[9px] tracking-widest text-gold uppercase font-bold">Makati City</p>
+          </div>
+        </div>
+
+        <div className="hidden lg:flex items-center gap-1">
+          {items.map(i=>(
+            <button key={i.id} onClick={()=>nav(i.id)} className={`nav-link px-3 py-2 text-xs font-bold uppercase tracking-widest transition-colors ${page===i.id?'text-gold active':'text-white/80 hover:text-white'}`}>{i.l}</button>
+          ))}
+          {isAdmin
+            ?<button onClick={()=>nav('admin')} className="ml-3 bg-gold text-gd text-xs font-bold px-4 py-2 rounded-full hover:bg-yellow-300 transition-colors btn-ripple"><i className="fa-solid fa-gear mr-1"></i>Dashboard</button>
+            :student
+              ?<button onClick={onStudentLogout} className="ml-3 text-xs font-bold text-white/70 hover:text-white border border-white/20 px-4 py-2 rounded-full transition-colors"><i className="fa-solid fa-user mr-1 text-gold"></i>{student.name.split(' ')[0]}</button>
+              :<button onClick={()=>nav('login')} className="ml-3 bg-white/10 hover:bg-white/20 text-white text-xs font-bold px-4 py-2 rounded-full border border-white/20 transition-all btn-ripple">Login</button>
+          }
+        </div>
+
+        <button className="lg:hidden text-white text-xl p-2" onClick={()=>setMOpen(!mOpen)}>
+          <i className={`fa-solid ${mOpen?'fa-xmark':'fa-bars'}`}></i>
+        </button>
+      </div>
+
+      {mOpen&&(
+        <div className="lg:hidden mobile-menu border-t border-white/10" style={{background:'rgba(5,46,22,.99)'}}>
+          <div className="px-4 py-4 space-y-1">
+            {items.map(i=>(
+              <button key={i.id} onClick={()=>{nav(i.id);setMOpen(false);}} className={`block w-full text-left px-4 py-3 rounded-xl font-bold text-sm transition-colors ${page===i.id?'bg-gold/20 text-gold':'text-white hover:bg-white/10'}`}>{i.l}</button>
+            ))}
+            <button onClick={()=>{nav(isAdmin?'admin':'login');setMOpen(false);}} className="block w-full text-left px-4 py-3 rounded-xl font-bold text-sm text-gold">{isAdmin?'Dashboard':'Login'}</button>
+          </div>
+        </div>
+      )}
+    </nav>
+  );
+};
+
+/* ════════════════════════════════════════
+   FOOTER
+════════════════════════════════════════ */
+const Footer=({nav,settings})=>{
+  const t=settings.siteText||DEFAULT_TEXT;
+  return (
+    <footer className="bg-gd text-white pt-14 pb-8">
+      <div className="container mx-auto px-6">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-8 pb-8 border-b border-white/10">
+          <div className="flex items-center gap-4">
+            <Logo base64={settings.logoBase64} size={52}/>
+            <div>
+              <h3 className="font-bold text-xl font-lora">Maximo Estrella SHS</h3>
+              <p className="text-gold text-xs tracking-widest uppercase mt-1">Molding Excellence with Honor</p>
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-4 justify-center">
+            {[['home','Home'],['programs','Programs'],['careerpaths','Career Paths'],['admissions','Admissions'],['announcements','News & Events'],['gallery','Gallery'],['elections','Elections'],['about','About'],['contact','Contact']].map(([id,l])=>(
+              <button key={id} onClick={()=>nav(id)} className="text-sm text-gray-400 hover:text-gold transition-colors">{l}</button>
+            ))}
+          </div>
+        </div>
+        <p className="text-center text-xs text-gray-500">{t.footerCopy}</p>
+      </div>
+    </footer>
+  );
+};
+
+/* ════════════════════════════════════════
+   ANNOUNCEMENTS PAGE
+════════════════════════════════════════ */
+const AnnouncementsPage=({settings})=>{
+  const anns=(settings.announcements||[]).filter(a=>a.active).slice().reverse();
+  const typeLabel={success:'Official',warning:'Advisory',info:'Notice',urgent:'Urgent'};
+  const typeColors={
+    success:'bg-green-100 text-green-700 border-green-200',
+    warning:'bg-amber-100 text-amber-700 border-amber-200',
+    info:'bg-sky-100 text-sky-700 border-sky-200',
+    urgent:'bg-red-100 text-red-700 border-red-200',
+  };
+  const typeIcons={success:'fa-bullhorn',warning:'fa-triangle-exclamation',info:'fa-circle-info',urgent:'fa-siren-on'};
+  return (
+    <div className="pb-20 min-h-screen bg-gray-50">
+      <div className="container mx-auto px-6 max-w-3xl">
+        <R>
+          <div className="text-center mb-12">
+            <p className="text-ga font-bold tracking-widest uppercase text-sm mb-3">Official Communications</p>
+            <h1 className="font-lora text-4xl md:text-5xl font-bold text-gd mb-4">News &amp; Events</h1>
+            <div className="w-20 h-1 bg-g rounded-full mx-auto"></div>
+            <p className="text-gray-500 mt-4">Stay updated with the latest news and notices from MESHS.</p>
+          </div>
+        </R>
+        {anns.length===0&&(
+          <div className="text-center py-20 bg-white rounded-2xl shadow-sm text-gray-300">
+            <i className="fa-solid fa-bullhorn text-5xl mb-4 block"></i>
+            <p className="font-semibold">No announcements at this time.</p>
+            <p className="text-sm mt-1">Check back later for updates.</p>
+          </div>
+        )}
+        <div className="space-y-4">
+          {anns.map((a,i)=>(
+            <R key={a.id} delay={i*60}>
+              <div className={`bg-white rounded-2xl shadow-sm border p-6 card-hover ${typeColors[a.type]||typeColors.success} border`}>
+                <div className="flex items-start gap-4">
+                  <div className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 ${typeColors[a.type]||typeColors.success}`}>
+                    <i className={`fa-solid ${typeIcons[a.type]||typeIcons.success} text-lg`}></i>
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-2 flex-wrap">
+                      <span className={`text-xs font-bold px-2.5 py-1 rounded-full border ${typeColors[a.type]||typeColors.success}`}>{typeLabel[a.type]||'Notice'}</span>
+                      <span className="text-xs text-gray-400">{timeAgo(a.ts||Date.now())}</span>
+                    </div>
+                    <p className="text-gray-800 font-medium leading-relaxed">{a.text}</p>
+                    {a.link&&<a href={`#${a.link}`} className="inline-flex items-center gap-1.5 mt-3 text-sm font-bold text-g hover:text-gd transition-colors">Learn more <i className="fa-solid fa-arrow-right text-xs"></i></a>}
+                  </div>
+                </div>
+              </div>
+            </R>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
+/* ════════════════════════════════════════
+   HOME PAGE
+════════════════════════════════════════ */
+const StatCounter=({val,lbl,isAdmin,onEdit,k1,k2})=>{
+  const ref=useRef();const [done,setDone]=useState(false);
+  useEffect(()=>{
+    const obs=new IntersectionObserver(([e])=>{if(e.isIntersecting&&!done){setDone(true);obs.disconnect();}},{threshold:.5});
+    if(ref.current) obs.observe(ref.current);
+    return()=>obs.disconnect();
+  },[]);
+  return (
+    <div ref={ref} className="text-center">
+      <p className={`text-gold text-4xl font-bold transition-all duration-500 ${done?'count-in':''}`}>
+        {isAdmin?<InlineEdit value={val} onChange={v=>onEdit(k1,v)} className="text-gold text-4xl font-bold text-center" isAdmin/>:val}
+      </p>
+      <p className="text-gray-300 text-sm mt-1">
+        {isAdmin?<InlineEdit value={lbl} onChange={v=>onEdit(k2,v)} className="text-gray-300 text-sm" isAdmin/>:lbl}
+      </p>
+    </div>
+  );
+};
+
+const Home=({nav,settings,setSettings,isAdmin})=>{
+  const t=settings.siteText||DEFAULT_TEXT;
+  const upT=(k,v)=>setSettings(s=>({...s,siteText:{...(s.siteText||DEFAULT_TEXT),[k]:v}}));
+
+  const heroBg=settings.heroBgType==='image'&&settings.heroBgBase64
+    ?settings.heroBgBase64
+    :'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=1920';
+
+  return (
+    <div>
+      {/* HERO */}
+      <section className="relative h-screen flex items-center justify-center text-center px-6 overflow-hidden">
+        {settings.heroBgType==='video'&&settings.heroBgVideoUrl
+          ?<video className="hero-media" src={settings.heroBgVideoUrl} autoPlay muted loop playsInline/>
+          :<img className="hero-media" src={heroBg} alt="MESHS"/>
+        }
+        <div className="hero-overlay"/>
+        <div className="hero-content max-w-5xl w-full">
+          <p className="h1 font-cinzel text-gold text-lg md:text-xl mb-4 tracking-widest drop-shadow">{t.heroEst}</p>
+          <h1 className="h2 font-lora font-bold text-white text-5xl md:text-8xl mb-6 leading-tight drop-shadow-lg" style={{whiteSpace:'pre-line'}}>{t.heroTitle}</h1>
+          <p className="h3 text-xl md:text-2xl text-gray-200 font-light italic mb-10">{t.heroTagline}</p>
+          <div className="h4 flex flex-col md:flex-row gap-4 justify-center">
+            <Btn onClick={()=>nav('admissions')} variant="gold" size="lg">Enroll Now!</Btn>
+            <Btn onClick={()=>nav('about')} variant="outline" size="lg">Learn More</Btn>
+          </div>
+        </div>
+      </section>
+
+      {/* STATS */}
+      <div className="bg-gd py-10 border-t-4 border-gold">
+        <div className="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
+          {[['stat1Val','stat1Lbl'],['stat2Val','stat2Lbl'],['stat3Val','stat3Lbl'],['stat4Val','stat4Lbl']].map(([k1,k2])=>(
+            <StatCounter key={k1} val={t[k1]} lbl={t[k2]} isAdmin={isAdmin} onEdit={upT} k1={k1} k2={k2}/>
+          ))}
+        </div>
+      </div>
+
+      {/* WHY MESHS */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col lg:flex-row items-center gap-16">
+            <R dir="left" className="lg:w-1/2">
+              <div className="relative">
+                <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=800" className="rounded-2xl shadow-2xl relative z-10" alt="Students"/>
+                <div className="absolute -top-5 -left-5 w-full h-full bg-gold/20 rounded-2xl -z-0"></div>
+              </div>
+            </R>
+            <div className="lg:w-1/2">
+              <R>
+                <p className="text-ga font-bold tracking-widest uppercase mb-3 text-sm">{isAdmin?<InlineEdit value={t.whyTitle} onChange={v=>upT('whyTitle',v)} className="text-ga font-bold tracking-widest uppercase text-sm" isAdmin/>:t.whyTitle}</p>
+                <h2 className="font-lora text-4xl font-bold text-gd mb-5">A Premier Academic Institution</h2>
+                <p className="text-gray-600 text-lg leading-relaxed mb-6">
+                  {isAdmin?<InlineEdit value={t.whyBody} onChange={v=>upT('whyBody',v)} className="text-gray-600" as="p" multiline isAdmin/>:t.whyBody}
+                </p>
+                <div className="grid grid-cols-2 gap-3">
+                  {[['feat1','feat2'],['feat3','feat4']].flat().map(k=>(
+                    <div key={k} className="flex items-center gap-3">
+                      <i className="fa-solid fa-check text-g"></i>
+                      <span className="font-semibold text-sm">{isAdmin?<InlineEdit value={t[k]} onChange={v=>upT(k,v)} isAdmin className="font-semibold text-sm"/>:t[k]}</span>
+                    </div>
+                  ))}
+                </div>
+              </R>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* LATEST NEWS */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-6">
+          <SH title="Latest News & Events" subtitle="Stay up to date with what's happening at MESHS"/>
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {((settings.announcements||[]).filter(a=>a.active).slice(-3).reverse()).map((a,i)=>(
+              <R key={a.id} delay={i*80}>
+                <div className="bg-gray-50 rounded-2xl p-6 border-l-4 border-g card-hover">
+                  <span className={`text-xs font-bold px-3 py-1 rounded-full mb-3 inline-block ${a.type==='urgent'?'bg-red-100 text-red-700':a.type==='warning'?'bg-amber-100 text-amber-700':a.type==='info'?'bg-sky-100 text-sky-700':'bg-green-100 text-green-700'}`}>{a.type==='urgent'?'Urgent':a.type==='warning'?'Advisory':a.type==='info'?'Notice':'Official'}</span>
+                  <p className="font-bold text-gd mb-2 leading-snug">{a.text}</p>
+                  <p className="text-xs text-gray-400">{timeAgo(a.ts||Date.now())}</p>
+                </div>
+              </R>
+            ))}
+            {((settings.announcements||[]).filter(a=>a.active).length===0)&&[1,2,3].map(i=>(
+              <R key={i} delay={i*80}>
+                <div className="bg-gray-50 rounded-2xl p-6 border-l-4 border-g card-hover">
+                  <span className="text-xs font-bold px-3 py-1 rounded-full mb-3 inline-block bg-green-100 text-green-700">Official</span>
+                  <p className="font-bold text-gd mb-2">{i===1?'🎓 Enrollment for S.Y. 2026-2027 is now OPEN!':i===2?'🏆 MESHS tops district quiz competition':'📣 Festival of Talents coming this March!'}</p>
+                  <p className="text-xs text-gray-400">Just now</p>
+                </div>
+              </R>
+            ))}
+          </div>
+          <div className="text-center mt-10">
+            <Btn onClick={()=>nav('announcements')} variant="ghost">View All Announcements <i className="fa-solid fa-arrow-right ml-1"></i></Btn>
+          </div>
+        </div>
+      </section>
+
+      {/* GALLERY PREVIEW */}
+      <section className="py-24 bg-gray-50">
+        <div className="container mx-auto px-6">
+          <SH title="Photo Gallery" subtitle="Moments that define the Estrellian experience"/>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-5xl mx-auto">
+            {(settings.gallery||INIT_GALLERY).slice(0,8).map((g,i)=>(
+              <R key={g.id} delay={i*50}>
+                <div className="rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all group cursor-pointer card-hover aspect-square" onClick={()=>nav('gallery')}>
+                  <img src={g.src} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt={g.caption||''}/>
+                </div>
+              </R>
+            ))}
+          </div>
+          <div className="text-center mt-10">
+            <Btn onClick={()=>nav('gallery')} variant="ghost">View Full Gallery <i className="fa-solid fa-arrow-right ml-1"></i></Btn>
+          </div>
+        </div>
+      </section>
+
+      {/* CAREER PATHS PREVIEW */}
+      <section className="py-24 bg-gd">
+        <div className="container mx-auto px-6">
+          <SH title={isAdmin?<InlineEdit value="Career Paths" onChange={v=>upT('careerTitle',v)} className="text-white text-4xl font-bold font-lora" isAdmin/>:"Career Paths"} subtitle={t.careerSub} light/>
+          <div className="grid md:grid-cols-4 gap-5">
+            {CAREER_PATHS.map((cp,i)=>(
+              <R key={cp.id} delay={i*80}>
+                <div onClick={()=>nav('careerpaths')} className="rounded-2xl p-8 flex flex-col items-center text-center cursor-pointer card-hover" style={{background:'rgba(255,255,255,.07)',border:'1px solid rgba(255,255,255,.08)'}}>
+                  <div className={`w-14 h-14 ${cp.color} rounded-2xl flex items-center justify-center text-xl mb-4 shadow-lg float`} style={{animationDelay:`${i*.5}s`}}>
+                    <i className={`fa-solid ${cp.icon} text-white`}></i>
+                  </div>
+                  <span className="text-gold font-bold text-xl font-cinzel mb-1">{cp.code}</span>
+                  <p className="text-gray-300 text-xs leading-relaxed">{cp.name}</p>
+                </div>
+              </R>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+/* ════════════════════════════════════════
+   PROGRAMS PAGE (Clubs + Seminars)
+════════════════════════════════════════ */
+const PostCard=({post,isAdmin,onDelete})=>(
+  <div className="bg-gray-50 rounded-xl overflow-hidden mb-4 border border-gray-100">
+    {post.photos?.length>0&&<PhotoGrid photos={post.photos}/>}
+    <div className="p-4">
+      {post.title&&<p className="font-bold text-gd mb-1">{post.title}</p>}
+      {post.desc&&<p className="text-gray-600 text-sm leading-relaxed">{post.desc}</p>}
+      {post.link&&<a href={post.link} target="_blank" rel="noreferrer" className="mt-2 inline-flex items-center gap-1 text-g text-sm font-bold hover:underline"><i className="fa-solid fa-link text-xs"></i>View Link</a>}
+      <div className="flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
+        <span className="text-xs text-gray-400">{timeAgo(post.timestamp)}</span>
+        {isAdmin&&<button onClick={onDelete} className="text-xs text-red-500 hover:text-red-700 font-bold"><i className="fa-solid fa-trash mr-1"></i>Delete</button>}
+      </div>
+    </div>
+  </div>
+);
+
+const Programs=({clubs,seminars,settings})=>{
+  const [selClub,setSelClub]=useState(null);
+  const [tab,setTab]=useState('clubs');
+  const t=settings.siteText||DEFAULT_TEXT;
+
+  return (
+    <div className="pt-8 pb-24 bg-gray-50 min-h-screen">
+      <div className="container mx-auto px-6">
+        <div className="pt-8">
+          <SH title="School Programs" subtitle={t.programsSub}/>
+        </div>
+        <div className="flex justify-center mb-10">
+          <div className="bg-white p-1 rounded-full shadow-lg inline-flex">
+            {[['clubs','Club Activities'],['seminars','Seminars & Events']].map(([id,l])=>(
+              <button key={id} onClick={()=>{setTab(id);setSelClub(null);}} className={`px-6 md:px-8 py-3 rounded-full font-bold text-sm transition-all ${tab===id?'bg-g text-white shadow':'text-gray-500 hover:text-g'}`}>{l}</button>
+            ))}
+          </div>
+        </div>
+
+        {tab==='clubs'?(
+          <div className="page-enter">
+            {!selClub?(
+              <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-4">
+                {clubs.map((c,i)=>(
+                  <R key={c.id} delay={i*50}>
+                    <button onClick={()=>setSelClub(c)} className="group w-full flex flex-col items-center p-6 bg-white rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all border-b-4 border-transparent hover:border-gold card-hover">
+                      {c.logoBase64
+                        ?<img src={c.logoBase64} className="w-16 h-16 rounded-2xl object-cover mb-3 shadow-lg" alt={c.name}/>
+                        :<div className={`w-16 h-16 ${c.color} text-white rounded-2xl flex items-center justify-center text-2xl shadow-lg group-hover:rotate-6 transition-transform mb-3`}><i className={`fa-solid ${c.icon}`}></i></div>
+                      }
+                      <h4 className="font-bold text-gd text-center text-sm leading-tight group-hover:text-g">{c.name}</h4>
+                      {c.posts?.length>0&&<span className="mt-1 text-xs text-gray-400">{c.posts.length} post{c.posts.length>1?'s':''}</span>}
+                    </button>
+                  </R>
+                ))}
+              </div>
+            ):(
+              <div className="page-enter max-w-2xl mx-auto">
+                <button onClick={()=>setSelClub(null)} className="mb-5 text-g font-bold flex items-center gap-2 hover:gap-4 transition-all text-sm"><i className="fa-solid fa-arrow-left"></i>Back to Clubs</button>
+                <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+                  <div className="p-6 border-b border-gray-100 flex items-center gap-4">
+                    {selClub.logoBase64
+                      ?<img src={selClub.logoBase64} className="w-14 h-14 rounded-xl object-cover shadow" alt={selClub.name}/>
+                      :<div className={`w-14 h-14 ${selClub.color} text-white rounded-xl flex items-center justify-center text-2xl shadow`}><i className={`fa-solid ${selClub.icon}`}></i></div>
+                    }
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-gd font-lora">{selClub.name}</h3>
+                      <p className="text-gray-500 text-sm">{selClub.desc}</p>
+                    </div>
+                    {selClub.fb&&<a href={selClub.fb} target="_blank" rel="noreferrer" className="text-[#1877F2] hover:scale-110 transition-transform text-2xl"><i className="fa-brands fa-facebook"></i></a>}
+                  </div>
+                  <div className="p-6">
+                    {(!selClub.posts||selClub.posts.length===0)
+                      ?<div className="text-center py-12 text-gray-300"><i className="fa-solid fa-images text-5xl mb-3 block"></i><p>No posts yet from this club.</p></div>
+                      :selClub.posts.slice().reverse().map(p=><PostCard key={p.id} post={p}/>)
+                    }
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        ):(
+          <div className="page-enter grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {seminars.map((s,i)=>(
+              <R key={s.id} delay={i*60}>
+                <div className="bg-white rounded-2xl shadow-lg overflow-hidden border-t-4 border-g group card-hover">
+                  {s.photos?.length>0&&<PhotoGrid photos={s.photos}/>}
+                  <div className="p-6">
+                    <p className="text-ga text-xs font-bold uppercase tracking-widest mb-2">{s.date}</p>
+                    <h4 className="text-xl font-bold text-gd mb-2 group-hover:text-g font-lora">{s.title}</h4>
+                    <p className="text-gray-500 text-sm leading-relaxed mb-4">{s.desc}</p>
+                    <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+                      <span className="text-xs text-gray-400">{timeAgo(s.timestamp)}</span>
+                      {s.hasLink&&s.linkUrl&&<a href={s.linkUrl} target="_blank" rel="noreferrer" className="bg-g text-white px-4 py-2 rounded-lg font-bold text-xs hover:bg-gd transition-colors btn-ripple">Register →</a>}
+                    </div>
+                  </div>
+                </div>
+              </R>
+            ))}
+            {seminars.length===0&&<div className="col-span-3 text-center py-20 text-gray-300"><i className="fa-solid fa-chalkboard text-6xl mb-4 block"></i><p>No seminars posted yet.</p></div>}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+/* ════════════════════════════════════════
+   CAREER PATHS PAGE
+════════════════════════════════════════ */
+const CareerPathsPage=()=>(
+  <div className="pt-8 pb-24 bg-gray-50 min-h-screen">
+    <div className="container mx-auto px-6 pt-8">
+      <SH title="Career Paths" subtitle="Choose the path that ignites your passion"/>
+      <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        {CAREER_PATHS.map((cp,i)=>(
+          <R key={cp.id} delay={i*80}>
+            <div className={`${cp.light} border-l-8 ${cp.border} p-10 rounded-2xl shadow-md card-hover`}>
+              <div className={`w-14 h-14 ${cp.color} rounded-2xl flex items-center justify-center text-xl mb-5 shadow-lg`}><i className={`fa-solid ${cp.icon} text-white`}></i></div>
+              <h3 className={`text-3xl font-bold ${cp.tx} font-cinzel mb-1`}>{cp.code}</h3>
+              <h4 className="text-gd font-bold mb-4">{cp.name}</h4>
+              <p className="text-gray-600 leading-relaxed">{cp.desc}</p>
+            </div>
+          </R>
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
+/* ════════════════════════════════════════
+   ADMISSIONS
+════════════════════════════════════════ */
+const Admissions=({settings})=>{
+  const {admissionsOpen,applyLink,siteText:t=DEFAULT_TEXT}=settings;
+  return (
+    <div className="pt-8 pb-24 bg-white min-h-screen">
+      <div className="container mx-auto px-6 max-w-4xl pt-8">
+        <R><div className="text-center mb-16">
+          <p className="text-ga font-bold tracking-[.3em] uppercase mb-4 text-sm">Admissions</p>
+          <h2 className="font-lora text-5xl font-bold text-gd mb-4">Be an Estrellian!</h2>
+          <p className="text-gray-500 italic">{t.admissionsTagline}</p>
+        </div></R>
+        {admissionsOpen?(
+          <>
+            <div className="grid md:grid-cols-2 gap-10 mb-14">
+              <R dir="left">
+                <div className="bg-g text-white p-10 rounded-3xl shadow-2xl relative overflow-hidden">
+                  <div className="absolute top-0 right-0 p-8 opacity-10"><i className="fa-solid fa-calendar-days text-9xl"></i></div>
+                  <h3 className="text-2xl font-bold mb-4">Enrollment Period</h3>
+                  <p className="text-gold text-4xl font-lora font-bold mb-2">{t.enrollPeriod}</p>
+                  <p className="text-xl font-light">{t.enrollDates}</p>
+                  <p className="mt-8 pt-8 border-t border-white/20 text-sm italic text-emerald-100">Ensure all documents are ready before the deadline.</p>
+                </div>
+              </R>
+              <R dir="right">
+                <div className="bg-gray-50 p-10 rounded-3xl border-2 border-dashed border-gray-200">
+                  <h3 className="text-2xl font-bold text-gd mb-6">Requirements</h3>
+                  <ul className="space-y-4">
+                    {['Original PSA Birth Certificate','Grade 10 Report Card (Form 138)','Certificate of Good Moral Character','Completion Certificate (Grade 10)','2x2 ID Pictures (White Background)'].map(r=>(
+                      <li key={r} className="flex gap-4 items-start"><i className="fa-solid fa-circle-check text-g mt-1 flex-shrink-0"></i><span className="text-gray-700">{r}</span></li>
+                    ))}
+                  </ul>
+                </div>
+              </R>
+            </div>
+            <R>
+              <div className="text-center">
+                {applyLink
+                  ?<a href={applyLink} target="_blank" rel="noreferrer" className="inline-block bg-gd hover:bg-black text-white px-16 py-6 rounded-2xl shadow-2xl font-bold text-2xl transform hover:scale-105 transition-all btn-ripple">APPLY HERE!</a>
+                  :<div className="inline-block bg-gray-200 text-gray-400 px-16 py-6 rounded-2xl font-bold text-2xl cursor-not-allowed">Application Link Coming Soon</div>
+                }
+                <p className="mt-6 text-gray-400 text-sm">Secure your slot today and be part of the MESHSterpiece.</p>
+              </div>
+            </R>
+          </>
+        ):(
+          <R>
+            <div className="bg-red-50 border-2 border-red-200 p-12 rounded-3xl text-center">
+              <div className="w-20 h-20 bg-red-100 text-red-500 rounded-full flex items-center justify-center text-4xl mx-auto mb-6 float"><i className="fa-solid fa-lock"></i></div>
+              <h3 className="text-3xl font-bold text-red-800 mb-4">Admissions are Currently Closed</h3>
+              <p className="text-red-600 text-lg">Thank you for your interest in MESHS. Please check back later or follow our social media pages for updates.</p>
+            </div>
+          </R>
+        )}
+      </div>
+    </div>
+  );
+};
+
+/* ════════════════════════════════════════
+   ELECTIONS PAGE
+════════════════════════════════════════ */
+const ElectionsPage=({elections,student,onLoginRedirect,onVote})=>{
+  const [selEl,setSelEl]=useState(null);
+  const [votes,setVotes]=useState({});
+  const [done,setDone]=useState(false);
+  const open=elections.filter(e=>e.status==='open');
+  const closed=elections.filter(e=>e.status==='closed');
+  const alreadyVoted=selEl&&student&&selEl.voters?.includes(student.userId);
+  const allVoted=selEl&&selEl.positions?.every(p=>votes[p.id]);
+
+  const handleVote=()=>{if(!student||!selEl)return;onVote(selEl.id,votes);setDone(true);};
+
+  return (
+    <div className="pt-8 pb-24 bg-gray-50 min-h-screen">
+      <div className="container mx-auto px-6 max-w-4xl pt-8">
+        <SH title="Club Elections" subtitle="Your vote, your voice"/>
+        {!student&&<R><div className="bg-yellow-50 border border-yellow-200 rounded-2xl p-5 mb-10 flex items-center gap-4">
+          <i className="fa-solid fa-triangle-exclamation text-yellow-500 text-2xl flex-shrink-0"></i>
+          <p className="text-yellow-800 text-sm font-bold">You need to log in to vote. <button onClick={onLoginRedirect} className="underline">Login here →</button></p>
+        </div></R>}
+        {open.length===0&&closed.length===0&&<div className="text-center py-24 text-gray-300"><i className="fa-solid fa-ballot text-6xl mb-4 block float"></i><p className="text-xl">No elections at the moment.</p></div>}
+        {open.length>0&&<div className="mb-12">
+          <h3 className="text-2xl font-bold text-gd mb-5 flex items-center gap-3"><span className="w-3 h-3 bg-green-500 rounded-full live inline-block"></span>Open Elections</h3>
+          <div className="grid md:grid-cols-2 gap-5">
+            {open.map(el=>(
+              <div key={el.id} onClick={()=>{setSelEl(el);setVotes({});setDone(false);}} className="bg-white rounded-2xl shadow-lg p-8 border-t-4 border-g cursor-pointer card-hover">
+                <div className="flex items-start justify-between mb-3"><h4 className="text-xl font-bold text-gd font-lora">{el.title}</h4><span className="bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full ml-2">OPEN</span></div>
+                <p className="text-gray-500 text-sm mb-4">{el.desc}</p>
+                <p className="text-xs text-gray-400">{el.positions?.length||0} position(s) · {el.voters?.length||0} votes cast</p>
+              </div>
+            ))}
+          </div>
+        </div>}
+        {closed.length>0&&<div>
+          <h3 className="text-2xl font-bold text-gd mb-5">Results</h3>
+          <div className="grid md:grid-cols-2 gap-5">
+            {closed.map(el=>(
+              <div key={el.id} onClick={()=>{setSelEl(el);setVotes({});setDone(false);}} className="bg-white rounded-2xl shadow-lg p-8 border-t-4 border-gray-300 cursor-pointer card-hover">
+                <div className="flex items-start justify-between mb-3"><h4 className="text-xl font-bold text-gd font-lora">{el.title}</h4><span className="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full ml-2">CLOSED</span></div>
+                <p className="text-gray-500 text-sm">{el.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>}
+        {selEl&&<Modal title={selEl.title} onClose={()=>setSelEl(null)} wide>
+          <p className="text-gray-500 mb-6">{selEl.desc}</p>
+          {selEl.status==='closed'?(
+            <div className="space-y-6">
+              {selEl.positions?.map(pos=>{
+                const tot=pos.candidates?.reduce((s,c)=>s+(c.votes||0),0)||0;
+                return <div key={pos.id}>
+                  <h4 className="font-bold text-gd mb-3 text-lg font-lora">{pos.title}</h4>
+                  {[...(pos.candidates||[])].sort((a,b)=>(b.votes||0)-(a.votes||0)).map((c,i)=>{
+                    const pct=tot>0?Math.round(((c.votes||0)/tot)*100):0;
+                    return <div key={c.id} className={`flex items-center gap-3 p-4 rounded-xl mb-2 ${i===0?'bg-g/10 border-2 border-g':'bg-gray-50'}`}>
+                      {c.photo?<img src={c.photo} className="w-10 h-10 rounded-full object-cover flex-shrink-0" alt={c.name}/>:<div className="w-10 h-10 rounded-full bg-g flex items-center justify-center text-white font-bold flex-shrink-0">{c.name[0]}</div>}
+                      <div className="flex-1 min-w-0">
+                        <p className="font-bold text-sm">{c.name} {i===0&&<span className="text-g">★ Winner</span>}</p>
+                        <div className="flex items-center gap-2 mt-1"><div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden"><div className="h-full bg-g rounded-full" style={{width:`${pct}%`,transition:'width 1s ease'}}></div></div><span className="text-xs font-bold text-gray-500 whitespace-nowrap">{c.votes||0} ({pct}%)</span></div>
+                      </div>
+                    </div>;
+                  })}
+                </div>;
+              })}
+            </div>
+          ):alreadyVoted||done?(
+            <div className="text-center py-12"><i className="fa-solid fa-circle-check text-6xl text-g mb-4 block float"></i><h3 className="text-2xl font-bold text-gd mb-2">Vote Submitted!</h3><p className="text-gray-500">Thank you for participating!</p></div>
+          ):!student?(
+            <div className="text-center py-12"><i className="fa-solid fa-lock text-5xl text-gray-300 mb-4 block float"></i><p className="font-bold mb-4">Please log in to cast your vote</p><Btn onClick={()=>{setSelEl(null);onLoginRedirect();}}>Go to Login</Btn></div>
+          ):(
+            <div className="space-y-7">
+              {selEl.positions?.map(pos=>(
+                <div key={pos.id}>
+                  <h4 className="font-bold text-gd mb-1 text-lg font-lora">{pos.title}</h4>
+                  <p className="text-xs text-gray-500 mb-3">Select one candidate</p>
+                  <div className="space-y-3">
+                    {pos.candidates?.map(c=>(
+                      <label key={c.id} className={`flex items-center gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${votes[pos.id]===c.id?'border-g bg-green-50':'border-gray-200 hover:border-gray-300'}`}>
+                        <input type="radio" name={pos.id} className="hidden" checked={votes[pos.id]===c.id} onChange={()=>setVotes({...votes,[pos.id]:c.id})}/>
+                        {c.photo?<img src={c.photo} className="w-12 h-12 rounded-full object-cover flex-shrink-0" alt={c.name}/>:<div className="w-12 h-12 rounded-full bg-g flex items-center justify-center text-white font-bold flex-shrink-0 text-lg">{c.name[0]}</div>}
+                        <div className="flex-1"><p className="font-bold">{c.name}</p><p className="text-xs text-gray-500">{c.desc}</p></div>
+                        {votes[pos.id]===c.id&&<i className="fa-solid fa-circle-check text-g text-xl ml-auto"></i>}
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              ))}
+              <Btn onClick={handleVote} disabled={!allVoted} className="w-full" size="lg">{allVoted?'Submit My Vote':'Select a candidate for each position'}</Btn>
+            </div>
+          )}
+        </Modal>}
+      </div>
+    </div>
+  );
+};
+
+/* ════════════════════════════════════════
+   ABOUT PAGE
+════════════════════════════════════════ */
+const FACULTY_DEFAULT=[
+  {id:'f1',name:'Mr. Carlo Santos',role:'School Principal',dept:'School Administration',photo:''},
+  {id:'f2',name:'Ms. Maria Reyes',role:'Assistant Principal',dept:'Academic Affairs',photo:''},
+  {id:'f3',name:'Mr. Jose Dela Cruz',role:'Guidance Counselor',dept:'Student Services',photo:''},
+  {id:'f4',name:'Ms. Ana Bautista',role:'STEM Teacher',dept:'Science & Math',photo:''},
+  {id:'f5',name:'Mr. Ryan Lim',role:'ABM Teacher',dept:'Business Studies',photo:''},
+  {id:'f6',name:'Ms. Claire Torres',role:'ASH Teacher',dept:'Humanities & Arts',photo:''},
+];
+const About=({settings,setSettings,isAdmin})=>{
+  const t=settings.siteText||DEFAULT_TEXT;
+  const upT=(k,v)=>setSettings(s=>({...s,siteText:{...(s.siteText||DEFAULT_TEXT),[k]:v}}));
+  const faculty=settings.faculty||FACULTY_DEFAULT;
+  const setFaculty=f=>setSettings(s=>({...s,faculty:f}));
+  const [fModal,setFModal]=useState(null);
+  const [fForm,setFForm]=useState({name:'',role:'',dept:'',photo:''});
+
+  const saveFaculty=()=>{
+    if(fModal==='add') setFaculty([...faculty,{...fForm,id:uid()}]);
+    else setFaculty(faculty.map(f=>f.id===fModal.id?{...f,...fForm}:f));
+    setFModal(null);
+  };
+
+  return (
+    <div className="pt-8 pb-24 min-h-screen">
+      <div className="container mx-auto px-6 max-w-4xl pt-8">
+        <SH title={isAdmin?<InlineEdit value={t.aboutTitle} onChange={v=>upT('aboutTitle',v)} className="text-gd text-4xl font-bold font-lora" isAdmin/>:t.aboutTitle} subtitle={t.aboutSub}/>
+        <div className="text-gray-600 text-lg leading-relaxed">
+          <R><p className="mb-8">{isAdmin?<InlineEdit value={t.aboutBody} onChange={v=>upT('aboutBody',v)} as="p" multiline isAdmin className="text-gray-600"/>:t.aboutBody}</p></R>
+          <R>
+            <div className="bg-g p-10 rounded-3xl text-white mb-10 shadow-2xl">
+              <h3 className="text-2xl font-bold text-gold mb-4 font-lora">Our Core Philosophy</h3>
+              <p className="italic text-xl">{isAdmin?<InlineEdit value={t.philosophy} onChange={v=>upT('philosophy',v)} className="italic text-xl text-white" isAdmin/>:t.philosophy}</p>
+            </div>
+          </R>
+          <R><p className="mb-12">{isAdmin?<InlineEdit value={t.aboutBody2} onChange={v=>upT('aboutBody2',v)} as="p" multiline isAdmin className="text-gray-600"/>:t.aboutBody2}</p></R>
+        </div>
+
+        {/* School Values */}
+        <R>
+          <div className="mb-16">
+            <h3 className="text-3xl font-bold text-gd font-lora mb-8 text-center">Our Core Values</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+              {[
+                {icon:'fa-star',color:'bg-amber-100 text-amber-700',title:'Excellence',desc:'We pursue the highest standards in academics and character.'},
+                {icon:'fa-shield-halved',color:'bg-green-100 text-green-700',title:'Honor',desc:'We act with integrity and stand by our word.'},
+                {icon:'fa-hands-holding',color:'bg-blue-100 text-blue-700',title:'Service',desc:'We give back to our community with compassion.'},
+                {icon:'fa-seedling',color:'bg-purple-100 text-purple-700',title:'Growth',desc:'We embrace continuous learning and self-improvement.'},
+              ].map(v=>(
+                <div key={v.title} className="bg-white rounded-2xl p-6 text-center shadow-sm card-hover">
+                  <div className={`w-14 h-14 ${v.color} rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4`}><i className={`fa-solid ${v.icon}`}></i></div>
+                  <h4 className="font-bold text-gd mb-2">{v.title}</h4>
+                  <p className="text-gray-500 text-xs leading-relaxed">{v.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </R>
+
+        {/* Faculty */}
+        <R>
+          <div>
+            <div className="flex items-center justify-between mb-8">
+              <h3 className="text-3xl font-bold text-gd font-lora">Faculty & Staff</h3>
+              {isAdmin&&<Btn onClick={()=>{setFForm({name:'',role:'',dept:'',photo:''});setFModal('add');}} size="sm"><i className="fa-solid fa-plus"></i>Add Member</Btn>}
+            </div>
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {faculty.map((f,i)=>(
+                <R key={f.id} delay={i*50}>
+                  <div className="bg-white rounded-2xl shadow-sm p-6 text-center card-hover group relative">
+                    <div className="w-20 h-20 rounded-full mx-auto mb-4 overflow-hidden bg-g flex items-center justify-center shadow-lg">
+                      {f.photo?<img src={f.photo} className="w-full h-full object-cover" alt={f.name}/>:<span className="text-white font-bold text-2xl">{f.name[0]}</span>}
+                    </div>
+                    <h4 className="font-bold text-gd font-lora">{f.name}</h4>
+                    <p className="text-g font-bold text-sm mt-0.5">{f.role}</p>
+                    <p className="text-gray-400 text-xs mt-1">{f.dept}</p>
+                    {isAdmin&&(
+                      <div className="absolute top-3 right-3 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button onClick={()=>{setFForm({name:f.name,role:f.role,dept:f.dept,photo:f.photo||''});setFModal(f);}} className="w-7 h-7 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center text-xs hover:bg-blue-200"><i className="fa-solid fa-pen"></i></button>
+                        <button onClick={()=>setFaculty(faculty.filter(x=>x.id!==f.id))} className="w-7 h-7 bg-red-100 text-red-500 rounded-lg flex items-center justify-center text-xs hover:bg-red-200"><i className="fa-solid fa-trash"></i></button>
+                      </div>
+                    )}
+                  </div>
+                </R>
+              ))}
+            </div>
+          </div>
+        </R>
+      </div>
+      {fModal&&<Modal title={fModal==='add'?'Add Faculty Member':'Edit Member'} onClose={()=>setFModal(null)}>
+        <div className="space-y-4">
+          <div className="flex items-center gap-4">
+            <div className="w-16 h-16 rounded-full bg-g flex items-center justify-center text-white font-bold text-xl overflow-hidden flex-shrink-0">
+              {fForm.photo?<img src={fForm.photo} className="w-full h-full object-cover" alt=""/>:<span>{fForm.name?fForm.name[0]:'?'}</span>}
+            </div>
+            <UploadBtn label="Upload Photo" crop aspect={1} onFile={async f=>{const b=typeof f==='string'?f:await compressImg(f,300,.9);setFForm(x=>({...x,photo:b}));}}/>
+          </div>
+          <div><label className="block text-xs font-bold text-gray-500 uppercase mb-1">Full Name *</label><input value={fForm.name} onChange={e=>setFForm({...fForm,name:e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3" placeholder="Full name"/></div>
+          <div><label className="block text-xs font-bold text-gray-500 uppercase mb-1">Role / Position</label><input value={fForm.role} onChange={e=>setFForm({...fForm,role:e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3" placeholder="e.g. STEM Teacher"/></div>
+          <div><label className="block text-xs font-bold text-gray-500 uppercase mb-1">Department</label><input value={fForm.dept} onChange={e=>setFForm({...fForm,dept:e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3" placeholder="e.g. Science & Math"/></div>
+          <Btn onClick={saveFaculty} disabled={!fForm.name} className="w-full" size="lg">Save</Btn>
+        </div>
+      </Modal>}
+    </div>
+  );
+};
+
+/* ════════════════════════════════════════
+   CONTACT PAGE
+════════════════════════════════════════ */
+const Contact=({settings,setSettings,isAdmin})=>{
+  const t=settings.siteText||DEFAULT_TEXT;
+  const upT=(k,v)=>setSettings(s=>({...s,siteText:{...(s.siteText||DEFAULT_TEXT),[k]:v}}));
+  const [form,setForm]=useState({fname:'',lname:'',email:'',subject:'',msg:''});
+  const [sent,setSent]=useState(false);
+
+  const handleSend=e=>{
+    e.preventDefault();
+    const mailto=`mailto:${t.contactEmail}?subject=${encodeURIComponent(form.subject||'Website Inquiry — '+form.fname+' '+form.lname)}&body=${encodeURIComponent(`From: ${form.fname} ${form.lname}\nEmail: ${form.email}\n\n${form.msg}`)}`;
+    window.open(mailto);
+    setSent(true);
+    setTimeout(()=>setSent(false),4000);
+  };
+
+  return (
+    <div className="pt-8 pb-24 bg-white min-h-screen">
+      <div className="container mx-auto px-6 pt-8">
+        <div className="max-w-6xl mx-auto rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row border border-gray-100">
+          <div className="lg:w-5/12 p-10 md:p-14 bg-gd text-white">
+            <h2 className="font-lora text-4xl font-bold mb-6">{t.contactTitle}</h2>
+            <p className="text-gray-400 mb-10 leading-relaxed">{t.contactDesc}</p>
+            <div className="space-y-7">
+              {[[`fa-location-dot`,`Location`,t.contactAddr],[`fa-phone`,`Call Us`,t.contactPhone],[`fa-envelope`,`Email`,t.contactEmail]].map(([ic,lbl,val])=>(
+                <div key={lbl} className="flex gap-5 items-start">
+                  <div className="w-12 h-12 bg-g rounded-full flex items-center justify-center text-white flex-shrink-0 float"><i className={`fa-solid ${ic}`}></i></div>
+                  <div><p className="text-gold font-bold mb-1">{lbl}</p>
+                    <p className="text-sm text-gray-300">{isAdmin&&lbl!=='Location'?<InlineEdit value={val} onChange={v=>upT(lbl==='Email'?'contactEmail':lbl==='Call Us'?'contactPhone':'contactAddr',v)} className="text-sm text-gray-300" isAdmin/>:val}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="lg:w-7/12 p-10 md:p-14">
+            {sent&&<div className="bg-green-50 border border-green-200 text-green-700 p-4 rounded-xl mb-6 text-sm font-bold flex items-center gap-2"><i className="fa-solid fa-check-circle"></i>Your message has been prepared. Please send from your email client.</div>}
+            <form onSubmit={handleSend} className="space-y-5">
+              <div className="grid grid-cols-2 gap-4">
+                <div><label className="block text-xs font-bold text-gray-400 uppercase mb-1">First Name</label><input value={form.fname} onChange={e=>setForm({...form,fname:e.target.value})} required className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3" placeholder="Juan"/></div>
+                <div><label className="block text-xs font-bold text-gray-400 uppercase mb-1">Last Name</label><input value={form.lname} onChange={e=>setForm({...form,lname:e.target.value})} required className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3" placeholder="Dela Cruz"/></div>
+              </div>
+              <div><label className="block text-xs font-bold text-gray-400 uppercase mb-1">Email</label><input type="email" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} required className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3" placeholder="juan@example.com"/></div>
+              <div><label className="block text-xs font-bold text-gray-400 uppercase mb-1">Subject</label><input value={form.subject} onChange={e=>setForm({...form,subject:e.target.value})} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3" placeholder="Inquiry about..."/></div>
+              <div><label className="block text-xs font-bold text-gray-400 uppercase mb-1">Message</label><textarea value={form.msg} onChange={e=>setForm({...form,msg:e.target.value})} required className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 h-32 resize-none" placeholder="How can we help?"></textarea></div>
+              <Btn type="submit" size="lg" className="w-full">Send Message <i className="fa-solid fa-paper-plane"></i></Btn>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/* ════════════════════════════════════════
+   LOGIN PAGE
+════════════════════════════════════════ */
+const LoginPage=({onAdminLogin,onStudentLogin})=>{
+  const [tab,setTab]=useState('student');
+  const [user,setUser]=useState('');
+  const [pass,setPass]=useState('');
+  const [err,setErr]=useState('');
+  const [loading,setLoading]=useState(false);
+
+  const handleSubmit=async e=>{
+    e.preventDefault();
+    setErr('');
+    setLoading(true);
+    await new Promise(r=>setTimeout(r,450));
+    if(tab==='admin'){
+      if(user===ADMIN_CREDS.username&&pass===ADMIN_CREDS.password){
+        onAdminLogin(); // navigates away — must return here so nothing runs on unmounted component
+        return;
+      }
+      setErr('Invalid credentials. Check username and password.');
+      setLoading(false);
+    } else {
+      const ok=onStudentLogin(user,pass);
+      if(!ok){
+        setErr('Account not found, wrong password, or deactivated.');
+        setLoading(false);
+      }
+      // on success onStudentLogin navigates away — don't setLoading
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="page-enter bg-white p-10 rounded-3xl shadow-2xl w-full max-w-md border-t-8 border-g mx-4">
+        <div className="text-center mb-8">
+          <div className="flex justify-center mb-4 float"><Logo size={68}/></div>
+          <h2 className="text-2xl font-bold text-gd font-lora">MESHS Portal</h2>
+          <p className="text-gray-500 text-sm mt-1">Sign in to your account</p>
+        </div>
+        <div className="flex bg-gray-100 rounded-xl p-1 mb-6">
+          {[['student','Student'],['admin','Admin']].map(([id,l])=>(
+            <button key={id} onClick={()=>{setTab(id);setErr('');}} className={`flex-1 py-2.5 rounded-lg font-bold text-sm transition-all ${tab===id?'bg-white text-gd shadow':'text-gray-500'}`}>{l}</button>
+          ))}
+        </div>
+        {err&&<div className="bg-red-50 border border-red-200 text-red-700 text-sm p-3 rounded-xl mb-4"><i className="fa-solid fa-circle-exclamation mr-2"></i>{err}</div>}
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div><label className="block text-xs font-bold text-gray-400 uppercase mb-1">Username</label><input type="text" value={user} onChange={e=>setUser(e.target.value)} required className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3" placeholder="Enter username"/></div>
+          <div><label className="block text-xs font-bold text-gray-400 uppercase mb-1">Password</label><input type="password" value={pass} onChange={e=>setPass(e.target.value)} required className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3" placeholder="••••••••"/></div>
+          <Btn type="submit" size="lg" className="w-full" disabled={loading}>{loading?<span><i className="fa-solid fa-spinner fa-spin mr-2"></i>Signing in...</span>:'Sign In'}</Btn>
+        </form>
+        {tab==='student'&&<p className="text-center text-xs text-gray-400 mt-4">Your account is created by the school admin.</p>}
+      </div>
+    </div>
+  );
+};
+
+/* ════════════════════════════════════════
+   ADMIN DASHBOARD
+════════════════════════════════════════ */
+const AdminDashboard=({onLogout,settings,setSettings,clubs,setClubs,seminars,setSeminars,elections,setElections,accounts,setAccounts})=>{
+  const [tab,setTab]=useState('overview');
+  const tabs=[
+    {id:'overview',icon:'fa-chart-pie',l:'Overview'},
+    {id:'announcements',icon:'fa-bullhorn',l:'Announcements'},
+    {id:'gallery',icon:'fa-images',l:'Gallery'},
+    {id:'clubs',icon:'fa-users',l:'Clubs'},
+    {id:'seminars',icon:'fa-chalkboard',l:'Seminars'},
+    {id:'elections',icon:'fa-ballot',l:'Elections'},
+    {id:'accounts',icon:'fa-user-gear',l:'Accounts'},
+    {id:'appearance',icon:'fa-wand-magic-sparkles',l:'Appearance'},
+    {id:'sitetext',icon:'fa-pen-nib',l:'Site Text'},
+    {id:'contact',icon:'fa-envelope',l:'Email & Contact'},
+    {id:'cloudsync',icon:'fa-cloud',l:'☁ Cloud Sync',highlight:!isCloud()},
+  ];
+  return (
+    <div className="pt-4 pb-24 min-h-screen bg-gray-50">
+      <div className="container mx-auto px-4 md:px-6 pt-6">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+          <div>
+            <h2 className="text-3xl font-bold text-gd font-lora">Admin Dashboard</h2>
+            <p className="text-gray-500 text-sm mt-1">Logged in as <strong className="text-g">MESHSadmin2026</strong> · Full Access</p>
+          </div>
+          <Btn onClick={onLogout} variant="danger" size="sm"><i className="fa-solid fa-right-from-bracket"></i>Logout</Btn>
+        </div>
+
+        <div className="overflow-x-auto mb-6">
+          <div className="flex gap-1 bg-white p-2 rounded-2xl shadow-sm w-max min-w-full md:w-auto">
+            {tabs.map(t=>(
+              <button key={t.id} onClick={()=>setTab(t.id)} className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs whitespace-nowrap transition-all ${tab===t.id?'bg-g text-white shadow':t.highlight?'text-amber-600 bg-amber-50 hover:bg-amber-100':'text-gray-500 hover:text-g hover:bg-gray-50'}`}>
+                <i className={`fa-solid ${t.icon}`}></i><span>{t.l}</span>
+                {t.highlight&&<span className="w-1.5 h-1.5 rounded-full bg-amber-500 live flex-shrink-0"></span>}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="page-enter" key={tab}>
+          {tab==='overview'&&<AdminOverview clubs={clubs} seminars={seminars} elections={elections} accounts={accounts}/>}
+          {tab==='announcements'&&<AdminAnnouncements settings={settings} setSettings={setSettings}/>}
+          {tab==='gallery'&&<GalleryPage settings={settings} setSettings={setSettings} isAdmin={true}/>}
+          {tab==='clubs'&&<AdminClubs clubs={clubs} setClubs={setClubs}/>}
+          {tab==='seminars'&&<AdminSeminars seminars={seminars} setSeminars={setSeminars}/>}
+          {tab==='elections'&&<AdminElections elections={elections} setElections={setElections}/>}
+          {tab==='accounts'&&<AdminAccounts accounts={accounts} setAccounts={setAccounts}/>}
+          {tab==='appearance'&&<AdminAppearance settings={settings} setSettings={setSettings}/>}
+          {tab==='sitetext'&&<AdminSiteText settings={settings} setSettings={setSettings}/>}
+          {tab==='contact'&&<AdminEmailContact settings={settings} setSettings={setSettings}/>}
+          {tab==='cloudsync'&&<AdminCloudSync settings={settings} clubs={clubs} seminars={seminars} elections={elections} accounts={accounts}/>}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/* ── Admin Cloud Sync ── */
+const AdminCloudSync=({settings,clubs,seminars,elections,accounts})=>{
+  const [pushing,setPushing]=useState(false);
+  const [pushOk,setPushOk]=useState(null);
+  const [showRules,setShowRules]=useState(false);
+  const syncSt=useSyncStatus();
+
+  const handlePushAll=async()=>{
+    setPushing(true);setPushOk(null);
+    const ok=await fbPushAll({
+      meshsSettings2:settings,meshsClubs2:clubs,
+      meshsSeminars2:seminars,meshsElections2:elections,meshsAccounts2:accounts,
+    });
+    setPushOk(ok);setPushing(false);
+  };
+
+  const RULES_CODE=`{\n  "rules": {\n    ".read": true,\n    ".write": true\n  }\n}`;
+
+  return (
+    <div className="max-w-2xl space-y-6">
+      <div>
+        <h3 className="text-xl font-bold text-gd flex items-center gap-2">
+          <i className="fa-solid fa-tower-broadcast text-green-500"></i>Cloud Sync
+        </h3>
+        <p className="text-sm text-gray-500 mt-1">Permanently connected — all devices stay live in sync automatically.</p>
+      </div>
+
+      {/* ── Permanent status card ── */}
+      <div className="bg-green-50 border-2 border-green-200 rounded-2xl p-5">
+        <div className="flex items-start gap-4">
+          <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0 text-xl text-green-600">
+            <i className="fa-solid fa-circle-check"></i>
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 mb-1">
+              <p className="font-bold text-green-800">Permanently Connected</p>
+              <span className="w-2 h-2 rounded-full bg-green-500 inline-block live"></span>
+            </div>
+            <p className="text-xs font-mono text-green-700 break-all mb-2">{FIREBASE_URL}</p>
+            <p className="text-xs text-green-700 font-bold">
+              Status: <span className="uppercase">{syncSt}</span>
+              {syncSt==='live'&&' ✓ All devices are up to date'}
+              {syncSt==='saving'&&' · Saving to cloud…'}
+              {syncSt==='loading'&&' · Fetching latest data…'}
+              {syncSt==='error'&&' ⚠ Check your internet connection'}
+            </p>
+          </div>
+          <Btn onClick={handlePushAll} disabled={pushing} size="sm" variant="green" className="flex-shrink-0">
+            {pushing
+              ?<><i className="fa-solid fa-spinner fa-spin"></i>Pushing…</>
+              :<><i className="fa-solid fa-upload"></i>Push All</>}
+          </Btn>
+        </div>
+      </div>
+
+      {pushOk===true&&(
+        <div className="bg-green-50 border border-green-200 rounded-2xl p-4 text-green-700 font-bold text-sm flex items-center gap-2">
+          <i className="fa-solid fa-check-circle text-lg"></i>All data pushed! Every device will update within 5 seconds.
+        </div>
+      )}
+      {pushOk===false&&(
+        <div className="bg-red-50 border border-red-200 rounded-2xl p-4 text-red-700 font-bold text-sm">
+          <i className="fa-solid fa-circle-exclamation mr-2"></i>Push failed. Check your internet connection and Firebase Rules below.
+        </div>
+      )}
+
+      {/* ── Firebase Rules fix ── */}
+      <div className="bg-amber-50 border-2 border-amber-200 rounded-2xl overflow-hidden">
+        <button onClick={()=>setShowRules(r=>!r)}
+                className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-amber-100 transition-colors">
+          <span className="font-bold text-amber-900 flex items-center gap-2">
+            <i className="fa-solid fa-triangle-exclamation text-amber-500"></i>
+            Important — Fix 30-Day Expiry
+          </span>
+          <i className={`fa-solid fa-chevron-${showRules?'up':'down'} text-amber-600 text-sm`}></i>
+        </button>
+        {showRules&&(
+          <div className="px-5 pb-5 space-y-3 text-sm text-amber-900">
+            <p>Firebase "Test Mode" rules <strong>expire after 30 days</strong>, blocking your site. Follow these steps to fix it permanently:</p>
+            <div className="space-y-2">
+              <p><strong>Step 1.</strong> Go to <a href="https://console.firebase.google.com" target="_blank" rel="noreferrer" className="text-blue-600 underline">console.firebase.google.com</a> → open your project <strong>meshs-website</strong>.</p>
+              <p><strong>Step 2.</strong> Left menu → <strong>Build</strong> → <strong>Realtime Database</strong> → click the <strong>Rules</strong> tab.</p>
+              <p><strong>Step 3.</strong> Replace everything in the editor with this:</p>
+            </div>
+            <pre className="bg-gray-900 text-green-400 rounded-xl px-5 py-4 text-xs font-mono overflow-x-auto">{RULES_CODE}</pre>
+            <p><strong>Step 4.</strong> Click the blue <strong>Publish</strong> button.</p>
+            <div className="bg-green-100 border border-green-300 rounded-xl p-3 text-green-800 font-bold text-xs flex items-center gap-2">
+              <i className="fa-solid fa-check-circle text-green-600"></i>
+              Done! Your database will work permanently — no more expiry, no more errors.
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* ── How Live Sync works ── */}
+      <div className="bg-blue-50 border border-blue-200 rounded-2xl p-5 space-y-2 text-sm text-blue-900">
+        <p className="font-bold flex items-center gap-2"><i className="fa-solid fa-circle-info text-blue-500"></i>How Live Sync works</p>
+        <p>• Admin saves a change → on Firebase within <strong>1–2 seconds</strong>.</p>
+        <p>• All other phones silently check every <strong>5 seconds</strong> — screens update automatically, no refresh needed.</p>
+        <p>• Works on unlimited devices at once.</p>
+        <p>• Use <strong>"Push All"</strong> above if any device seems out of date — forces an immediate full sync.</p>
+      </div>
+    </div>
+  );
+};
+
+
+/* ── Admin Overview ── */
+const AdminOverview=({clubs,seminars,elections,accounts})=>(
+  <div>
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      {[[`fa-users`,clubs.length,'Clubs','bg-emerald-100 text-emerald-700'],[`fa-chalkboard`,seminars.length,'Seminars','bg-blue-100 text-blue-700'],[`fa-ballot`,elections.length,'Elections','bg-amber-100 text-amber-700'],[`fa-user-gear`,accounts.length,'Accounts','bg-purple-100 text-purple-700']].map(([ic,v,l,c])=>(
+        <div key={l} className="bg-white p-6 rounded-2xl shadow-sm card-hover"><div className={`w-10 h-10 ${c} rounded-xl flex items-center justify-center mb-3 text-sm`}><i className={`fa-solid ${ic}`}></i></div><p className="text-3xl font-bold text-gd">{v}</p><p className="text-gray-500 text-sm mt-1">{l}</p></div>
+      ))}
+    </div>
+    <div className="grid md:grid-cols-2 gap-5">
+      <div className="bg-white p-6 rounded-2xl shadow-sm">
+        <h3 className="font-bold text-gd mb-4 flex items-center gap-2"><span className="w-2 h-2 bg-green-500 rounded-full live"></span>Active Elections</h3>
+        {elections.filter(e=>e.status==='open').length===0?<p className="text-gray-400 text-sm italic">No active elections.</p>:elections.filter(e=>e.status==='open').map(e=><div key={e.id} className="p-3 bg-green-50 rounded-xl mb-2 flex justify-between"><span className="font-bold text-sm">{e.title}</span><span className="text-green-600 text-xs font-bold">{e.voters?.length||0} votes</span></div>)}
+      </div>
+      <div className="bg-white p-6 rounded-2xl shadow-sm">
+        <h3 className="font-bold text-gd mb-4">Recent Accounts</h3>
+        {accounts.slice(-4).reverse().map(a=><div key={a.id} className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl mb-2"><div className="w-8 h-8 bg-g rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">{a.name[0]}</div><div className="flex-1 min-w-0"><p className="font-bold text-sm truncate">{a.name}</p><p className="text-xs text-gray-500 truncate">{a.username}</p></div><span className={`text-xs font-bold ${a.active?'text-green-600':'text-red-500'}`}>{a.active?'Active':'Inactive'}</span></div>)}
+        {accounts.length===0&&<p className="text-gray-400 text-sm italic">No accounts yet.</p>}
+      </div>
+    </div>
+  </div>
+);
+
+/* ── Admin Clubs ── */
+const AdminClubs=({clubs,setClubs})=>{
+  const [sel,setSel]=useState(null);
+  const [modal,setModal]=useState(null);
+  const [postModal,setPostModal]=useState(false);
+  const COLORS=['bg-emerald-600','bg-blue-600','bg-amber-600','bg-orange-600','bg-pink-600','bg-purple-600','bg-green-600','bg-rose-600','bg-indigo-600','bg-teal-600','bg-gray-700','bg-red-600'];
+  const ICONS=['fa-users','fa-newspaper','fa-microscope','fa-chart-line','fa-basketball','fa-heart','fa-leaf','fa-masks-theater','fa-graduation-cap','fa-palette','fa-landmark','fa-music','fa-book','fa-code','fa-hands-praying','fa-flask','fa-dumbbell'];
+  const emptyClub={name:'',icon:'fa-users',color:'bg-emerald-600',fb:'',desc:'',logoBase64:null};
+  const [form,setForm]=useState({...emptyClub});
+  const [postForm,setPostForm]=useState({title:'',desc:'',link:'',photos:[]});
+
+  const saveClub=()=>{
+    if(modal==='add') setClubs([...clubs,{...form,id:uid(),posts:[]}]);
+    else setClubs(clubs.map(c=>c.id===modal.id?{...c,...form}:c));
+    setModal(null);
+  };
+
+  const addPost=()=>{
+    if(!postForm.title&&!postForm.desc&&!postForm.photos.length) return;
+    const post={id:uid(),title:postForm.title,desc:postForm.desc,link:postForm.link,photos:postForm.photos,timestamp:Date.now()};
+    setClubs(clubs.map(c=>c.id===sel.id?{...c,posts:[...(c.posts||[]),post]}:c));
+    setSel(clubs.find(c=>c.id===sel.id)||sel);
+    setPostForm({title:'',desc:'',link:'',photos:[]});
+    setPostModal(false);
+  };
+
+  const delPost=(clubId,postId)=>setClubs(clubs.map(c=>c.id===clubId?{...c,posts:(c.posts||[]).filter(p=>p.id!==postId)}:c));
+
+  const clubData=sel?clubs.find(c=>c.id===sel.id)||sel:null;
+
+  if(sel&&clubData) return (
+    <div>
+      <div className="flex items-center gap-3 mb-6 flex-wrap">
+        <button onClick={()=>setSel(null)} className="text-g font-bold flex items-center gap-2 text-sm hover:gap-3 transition-all"><i className="fa-solid fa-arrow-left"></i>Back</button>
+        <h3 className="text-xl font-bold text-gd flex-1 font-lora">{clubData.name}</h3>
+        <Btn onClick={()=>setPostModal(true)} size="sm"><i className="fa-solid fa-plus"></i>Add Post</Btn>
+        <Btn onClick={()=>{setForm({name:clubData.name,icon:clubData.icon,color:clubData.color,fb:clubData.fb,desc:clubData.desc,logoBase64:clubData.logoBase64});setModal(clubData);}} variant="ghost" size="sm"><i className="fa-solid fa-pen"></i>Edit Club</Btn>
+      </div>
+      <div className="bg-white rounded-2xl shadow-sm p-6 mb-6 flex items-center gap-4">
+        {clubData.logoBase64?<img src={clubData.logoBase64} className="w-16 h-16 rounded-2xl object-cover shadow" alt={clubData.name}/>:<div className={`w-16 h-16 ${clubData.color} rounded-2xl flex items-center justify-center text-2xl text-white shadow flex-shrink-0`}><i className={`fa-solid ${clubData.icon}`}></i></div>}
+        <div className="flex-1"><h4 className="text-xl font-bold text-gd font-lora">{clubData.name}</h4><p className="text-gray-500 text-sm">{clubData.desc}</p></div>
+      </div>
+      <div className="max-w-2xl">
+        {(clubData.posts||[]).length===0?<div className="text-center py-16 bg-white rounded-2xl text-gray-300"><i className="fa-solid fa-images text-5xl mb-4 block"></i><p>No posts yet. Click "Add Post" to start.</p></div>
+          :[...(clubData.posts||[])].reverse().map(p=><PostCard key={p.id} post={p} isAdmin onDelete={()=>delPost(clubData.id,p.id)}/>)}
+      </div>
+      {postModal&&<Modal title={`New Post — ${clubData.name}`} onClose={()=>setPostModal(false)}>
+        <div className="space-y-4">
+          <div><label className="block text-xs font-bold text-gray-500 uppercase mb-1">Title</label><input value={postForm.title} onChange={e=>setPostForm({...postForm,title:e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3" placeholder="Event or announcement title..."/></div>
+          <div><label className="block text-xs font-bold text-gray-500 uppercase mb-1">Description</label><textarea value={postForm.desc} onChange={e=>setPostForm({...postForm,desc:e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3 h-24 resize-none" placeholder="Write something..."/></div>
+          <div><label className="block text-xs font-bold text-gray-500 uppercase mb-1">Link (optional)</label><input value={postForm.link} onChange={e=>setPostForm({...postForm,link:e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3" placeholder="https://..."/></div>
+          <div>
+            <div className="flex items-center justify-between mb-2"><label className="text-xs font-bold text-gray-500 uppercase">Photos ({postForm.photos.length})</label>
+              <UploadBtn label="Add Photos" multiple onFile={async(files)=>{const f=Array.isArray(files)?files:[files];const compressed=await Promise.all(f.map(x=>compressImg(x)));setPostForm(p=>({...p,photos:[...p.photos,...compressed]}));}}/>
+            </div>
+            <PhotoGrid photos={postForm.photos} onRemove={i=>setPostForm(p=>({...p,photos:p.photos.filter((_,j)=>j!==i)}))}/> 
+          </div>
+          <Btn onClick={addPost} className="w-full" size="lg">Publish Post</Btn>
+        </div>
+      </Modal>}
+      {modal&&<Modal title={modal==='add'?'Add Club':'Edit Club'} onClose={()=>setModal(null)}>
+        <ClubForm form={form} setForm={setForm} COLORS={COLORS} ICONS={ICONS} onSave={saveClub}/>
+      </Modal>}
+    </div>
+  );
+
+  return (
+    <div>
+      <div className="flex justify-between items-center mb-6">
+        <h3 className="text-xl font-bold text-gd">Clubs <span className="text-gray-400 font-normal">({clubs.length})</span></h3>
+        <Btn onClick={()=>{setForm({...emptyClub});setModal('add');}} size="sm"><i className="fa-solid fa-plus"></i>Add Club</Btn>
+      </div>
+      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+        {clubs.map(c=>(
+          <div key={c.id} className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 card-hover">
+            <div className="flex items-center gap-3 mb-3">
+              {c.logoBase64?<img src={c.logoBase64} className="w-11 h-11 rounded-xl object-cover shadow flex-shrink-0" alt={c.name}/>:<div className={`w-11 h-11 ${c.color} rounded-xl flex items-center justify-center text-white flex-shrink-0`}><i className={`fa-solid ${c.icon}`}></i></div>}
+              <div className="flex-1 min-w-0"><p className="font-bold text-gd truncate">{c.name}</p><p className="text-xs text-gray-400">{c.posts?.length||0} posts</p></div>
+            </div>
+            <div className="flex gap-2">
+              <Btn onClick={()=>setSel(c)} variant="ghost" size="sm" className="flex-1"><i className="fa-solid fa-eye text-g"></i>Manage</Btn>
+              <Btn onClick={()=>{setForm({name:c.name,icon:c.icon,color:c.color,fb:c.fb,desc:c.desc,logoBase64:c.logoBase64});setModal(c);}} variant="ghost" size="sm"><i className="fa-solid fa-pen"></i></Btn>
+              <Btn onClick={()=>setClubs(clubs.filter(x=>x.id!==c.id))} variant="ghost" size="sm"><i className="fa-solid fa-trash text-red-500"></i></Btn>
+            </div>
+          </div>
+        ))}
+      </div>
+      {modal&&<Modal title={modal==='add'?'Add Club':'Edit Club'} onClose={()=>setModal(null)}>
+        <ClubForm form={form} setForm={setForm} COLORS={COLORS} ICONS={ICONS} onSave={saveClub}/>
+      </Modal>}
+    </div>
+  );
+};
+
+const ClubForm=({form,setForm,COLORS,ICONS,onSave})=>(
+  <div className="space-y-4">
+    <div className="flex items-center gap-4 mb-2">
+      <div className="relative">
+        {form.logoBase64?<img src={form.logoBase64} className="w-16 h-16 rounded-2xl object-cover shadow"/>:<div className={`w-16 h-16 ${form.color} rounded-2xl flex items-center justify-center text-2xl text-white shadow`}><i className={`fa-solid ${form.icon}`}></i></div>}
+      </div>
+      <UploadBtn label="Upload Club Logo" crop aspect={1} onFile={async f=>{const b=typeof f==='string'?f:await compressImg(f,300,.9);setForm(x=>({...x,logoBase64:b}));}} className="flex-1"/>
+      {form.logoBase64&&<Btn onClick={()=>setForm(x=>({...x,logoBase64:null}))} variant="ghost" size="sm"><i className="fa-solid fa-trash text-red-500"></i></Btn>}
+    </div>
+    <div><label className="block text-xs font-bold text-gray-500 uppercase mb-1">Club Name *</label><input value={form.name} onChange={e=>setForm({...form,name:e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3" placeholder="Club name"/></div>
+    <div><label className="block text-xs font-bold text-gray-500 uppercase mb-1">Facebook Link</label><input value={form.fb} onChange={e=>setForm({...form,fb:e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3" placeholder="https://facebook.com/..."/></div>
+    <div><label className="block text-xs font-bold text-gray-500 uppercase mb-1">Description</label><textarea value={form.desc} onChange={e=>setForm({...form,desc:e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3 h-20 resize-none" placeholder="Brief description..."/></div>
+    <div><label className="block text-xs font-bold text-gray-500 uppercase mb-2">Icon</label><div className="flex flex-wrap gap-2">{ICONS.map(ic=><button type="button" key={ic} onClick={()=>setForm({...form,icon:ic})} className={`w-9 h-9 rounded-lg flex items-center justify-center transition-all ${form.icon===ic?'bg-g text-white':'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}><i className={`fa-solid ${ic} text-sm`}></i></button>)}</div></div>
+    <div><label className="block text-xs font-bold text-gray-500 uppercase mb-2">Color</label><div className="flex flex-wrap gap-2">{COLORS.map(col=><button type="button" key={col} onClick={()=>setForm({...form,color:col})} className={`w-7 h-7 rounded-full ${col} transition-all ${form.color===col?'ring-4 ring-offset-2 ring-gray-300 scale-110':''}`}></button>)}</div></div>
+    <Btn onClick={onSave} disabled={!form.name} className="w-full" size="lg">Save Club</Btn>
+  </div>
+);
+
+/* ── Admin Seminars ── */
+const AdminSeminars=({seminars,setSeminars})=>{
+  const [modal,setModal]=useState(null);
+  const emptyS={title:'',date:'',desc:'',photos:[],hasLink:false,linkUrl:'',timestamp:Date.now()};
+  const [form,setForm]=useState({...emptyS});
+
+  const save=()=>{
+    if(modal==='add') setSeminars([...seminars,{...form,id:uid(),timestamp:Date.now()}]);
+    else setSeminars(seminars.map(s=>s.id===modal.id?{...s,...form}:s));
+    setModal(null);
+  };
+
+  return (
+    <div>
+      <div className="flex justify-between items-center mb-6">
+        <h3 className="text-xl font-bold text-gd">Seminars <span className="text-gray-400 font-normal">({seminars.length})</span></h3>
+        <Btn onClick={()=>{setForm({...emptyS,timestamp:Date.now()});setModal('add');}} size="sm"><i className="fa-solid fa-plus"></i>Add Seminar</Btn>
+      </div>
+      <div className="space-y-4">
+        {seminars.slice().reverse().map(s=>(
+          <div key={s.id} className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 card-hover">
+            {s.photos?.length>0&&<div className="mb-4 rounded-xl overflow-hidden" style={{maxHeight:'180px'}}><img src={s.photos[0]} className="w-full h-44 object-cover"/></div>}
+            <div className="flex items-start gap-4">
+              <div className="flex-1 min-w-0">
+                <p className="font-bold text-gd">{s.title}</p>
+                <p className="text-xs text-gray-500 mt-0.5">{s.date} · {timeAgo(s.timestamp)}</p>
+                <p className="text-sm text-gray-500 mt-1 line-clamp-2">{s.desc}</p>
+                <div className="flex items-center gap-2 mt-2">
+                  <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${s.hasLink?'bg-green-100 text-green-700':'bg-gray-100 text-gray-500'}`}>{s.hasLink?'Has Link':'No Link'}</span>
+                  <span className="text-xs text-gray-400">{s.photos?.length||0} photo(s)</span>
+                </div>
+              </div>
+              <div className="flex gap-1.5 flex-shrink-0">
+                <Btn onClick={()=>{setForm({title:s.title,date:s.date,desc:s.desc,photos:s.photos||[],hasLink:s.hasLink||false,linkUrl:s.linkUrl||'',timestamp:s.timestamp});setModal(s);}} variant="ghost" size="sm"><i className="fa-solid fa-pen"></i></Btn>
+                <Btn onClick={()=>setSeminars(seminars.filter(x=>x.id!==s.id))} variant="ghost" size="sm"><i className="fa-solid fa-trash text-red-500"></i></Btn>
+              </div>
+            </div>
+          </div>
+        ))}
+        {seminars.length===0&&<div className="bg-white rounded-2xl p-12 text-center text-gray-300"><i className="fa-solid fa-chalkboard text-5xl mb-4 block"></i><p>No seminars yet.</p></div>}
+      </div>
+      {modal&&<Modal title={modal==='add'?'Add Seminar':'Edit Seminar'} onClose={()=>setModal(null)} wide>
+        <div className="space-y-4">
+          <div><label className="block text-xs font-bold text-gray-500 uppercase mb-1">Title *</label><input value={form.title} onChange={e=>setForm({...form,title:e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3" placeholder="Seminar title..."/></div>
+          <div><label className="block text-xs font-bold text-gray-500 uppercase mb-1">Date</label><input value={form.date} onChange={e=>setForm({...form,date:e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3" placeholder="e.g. Feb 25, 2026"/></div>
+          <div><label className="block text-xs font-bold text-gray-500 uppercase mb-1">Description</label><textarea value={form.desc} onChange={e=>setForm({...form,desc:e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3 h-24 resize-none" placeholder="Details about this seminar..."/></div>
+          <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
+            <div><p className="font-bold text-sm">Has Registration/Contact Link?</p><p className="text-xs text-gray-500 mt-0.5">Toggle on to show a link button</p></div>
+            <Toggle on={form.hasLink} onToggle={()=>setForm({...form,hasLink:!form.hasLink})}/>
+          </div>
+          {form.hasLink&&<div><label className="block text-xs font-bold text-gray-500 uppercase mb-1">Link URL</label><input value={form.linkUrl} onChange={e=>setForm({...form,linkUrl:e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3" placeholder="https://forms.google.com/..."/></div>}
+          <div>
+            <div className="flex items-center justify-between mb-2"><label className="text-xs font-bold text-gray-500 uppercase">Event Photos ({form.photos.length})</label>
+              <UploadBtn label="Add Photos" multiple onFile={async files=>{const f=Array.isArray(files)?files:[files];const b=await Promise.all(f.map(x=>compressImg(x)));setForm(p=>({...p,photos:[...p.photos,...b]}));}}/>
+            </div>
+            <PhotoGrid photos={form.photos} onRemove={i=>setForm(p=>({...p,photos:p.photos.filter((_,j)=>j!==i)}))}/>
+            {form.photos.length===0&&<div className="upload-zone rounded-xl p-8 text-center text-gray-400 text-sm cursor-pointer" onClick={()=>{}}>Click "Add Photos" to upload event photos</div>}
+          </div>
+          <Btn onClick={save} disabled={!form.title} className="w-full" size="lg">{modal==='add'?'Publish Seminar':'Save Changes'}</Btn>
+        </div>
+      </Modal>}
+    </div>
+  );
+};
+
+/* ── Admin Elections (reused from v2 logic) ── */
+const AdminElections=({elections,setElections})=>{
+  const [view,setView]=useState('list');
+  const [selId,setSelId]=useState(null);
+  const [cF,setCF]=useState({title:'',desc:''});
+  const [posModal,setPosModal]=useState(false);
+  const [posTitle,setPosTitle]=useState('');
+  const [candModal,setCandModal]=useState(null);
+  const [candForm,setCandForm]=useState({name:'',photo:'',desc:''});
+  const sel=elections.find(e=>e.id===selId);
+  const upd=(id,patch)=>setElections(elections.map(e=>e.id===id?{...e,...patch}:e));
+
+  if(view==='manage'&&sel) return (
+    <div>
+      <div className="flex items-center flex-wrap gap-3 mb-6">
+        <button onClick={()=>setView('list')} className="text-g font-bold flex items-center gap-2 text-sm hover:gap-3 transition-all"><i className="fa-solid fa-arrow-left"></i>Back</button>
+        <h3 className="text-xl font-bold text-gd flex-1 font-lora">{sel.title}</h3>
+        <span className={`text-xs font-bold px-3 py-1 rounded-full ${sel.status==='open'?'bg-green-100 text-green-700':sel.status==='closed'?'bg-gray-100 text-gray-600':'bg-yellow-100 text-yellow-700'}`}>{sel.status?.toUpperCase()}</span>
+        <Btn onClick={()=>upd(selId,{status:sel.status==='open'?'closed':'open'})} variant={sel.status==='open'?'danger':'green'} size="sm">{sel.status==='open'?'Close Election':'Open Election'}</Btn>
+      </div>
+      <div className="grid grid-cols-3 gap-4 mb-6">
+        {[['fa-users',sel.voters?.length||0,'Voters'],['fa-list',sel.positions?.length||0,'Positions'],['fa-person',sel.positions?.reduce((a,p)=>a+(p.candidates?.length||0),0)||0,'Candidates']].map(([ic,v,l])=>(
+          <div key={l} className="bg-white p-5 rounded-2xl shadow-sm text-center"><i className={`fa-solid ${ic} text-g text-xl mb-2 block`}></i><p className="text-3xl font-bold text-gd">{v}</p><p className="text-sm text-gray-500">{l}</p></div>
+        ))}
+      </div>
+      <div className="flex justify-between items-center mb-4">
+        <h4 className="font-bold text-gd">Positions & Live Results</h4>
+        <Btn onClick={()=>setPosModal(true)} size="sm"><i className="fa-solid fa-plus"></i>Add Position</Btn>
+      </div>
+      <div className="space-y-5">
+        {sel.positions?.map(pos=>(
+          <div key={pos.id} className="bg-white rounded-2xl shadow-sm border border-gray-100">
+            <div className="flex items-center justify-between p-5 border-b">
+              <h5 className="font-bold text-gd font-lora">{pos.title}</h5>
+              <div className="flex gap-2">
+                <Btn onClick={()=>setCandModal(pos.id)} size="sm"><i className="fa-solid fa-user-plus"></i>Add Candidate</Btn>
+                <Btn onClick={()=>upd(selId,{positions:sel.positions.filter(p=>p.id!==pos.id)})} variant="ghost" size="sm"><i className="fa-solid fa-trash text-red-500"></i></Btn>
+              </div>
+            </div>
+            <div className="p-5">
+              {(!pos.candidates||pos.candidates.length===0)&&<p className="text-gray-400 text-sm italic">No candidates yet.</p>}
+              <div className="grid md:grid-cols-2 gap-3">
+                {pos.candidates?.map(c=>{
+                  const tot=pos.candidates.reduce((s,x)=>s+(x.votes||0),0);
+                  const pct=tot>0?Math.round(((c.votes||0)/tot)*100):0;
+                  return <div key={c.id} className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl">
+                    {c.photo?<img src={c.photo} className="w-10 h-10 rounded-full object-cover flex-shrink-0" alt={c.name}/>:<div className="w-10 h-10 rounded-full bg-g flex items-center justify-center text-white font-bold flex-shrink-0">{c.name[0]}</div>}
+                    <div className="flex-1 min-w-0"><p className="font-bold text-sm truncate">{c.name}</p><div className="flex items-center gap-2 mt-1"><div className="flex-1 h-1.5 bg-gray-200 rounded-full overflow-hidden"><div className="h-full bg-g rounded-full" style={{width:`${pct}%`}}></div></div><span className="text-xs text-gray-500 whitespace-nowrap">{c.votes||0} ({pct}%)</span></div></div>
+                    <Btn onClick={()=>upd(selId,{positions:sel.positions.map(p=>p.id===pos.id?{...p,candidates:p.candidates.filter(x=>x.id!==c.id)}:p)})} variant="ghost" size="sm"><i className="fa-solid fa-trash text-red-500 text-xs"></i></Btn>
+                  </div>;
+                })}
+              </div>
+            </div>
+          </div>
+        ))}
+        {(!sel.positions||sel.positions.length===0)&&<div className="bg-white rounded-2xl p-12 text-center text-gray-300"><i className="fa-solid fa-ballot text-5xl mb-4 block"></i><p>Add positions to build this election.</p></div>}
+      </div>
+      {posModal&&<Modal title="Add Position" onClose={()=>setPosModal(false)}>
+        <div className="space-y-4"><div><label className="block text-xs font-bold text-gray-500 uppercase mb-1">Position Title *</label><input value={posTitle} onChange={e=>setPosTitle(e.target.value)} className="w-full border border-gray-200 rounded-xl px-4 py-3" placeholder="e.g. President"/></div>
+        <Btn onClick={()=>{if(!posTitle)return;upd(selId,{positions:[...(sel.positions||[]),{id:uid(),title:posTitle,candidates:[]}]});setPosModal(false);setPosTitle('');}} disabled={!posTitle} className="w-full">Add Position</Btn></div>
+      </Modal>}
+      {candModal&&<Modal title="Add Candidate" onClose={()=>setCandModal(null)}>
+        <div className="space-y-4">
+          <div><label className="block text-xs font-bold text-gray-500 uppercase mb-1">Full Name *</label><input value={candForm.name} onChange={e=>setCandForm({...candForm,name:e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3" placeholder="Juan Dela Cruz"/></div>
+          <div><label className="block text-xs font-bold text-gray-500 uppercase mb-1">Photo URL</label><input value={candForm.photo} onChange={e=>setCandForm({...candForm,photo:e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3" placeholder="https://..."/></div>
+          <div><label className="block text-xs font-bold text-gray-500 uppercase mb-1">Platform</label><textarea value={candForm.desc} onChange={e=>setCandForm({...candForm,desc:e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3 h-20 resize-none"/></div>
+          <Btn onClick={()=>{if(!candForm.name)return;const c={id:uid(),name:candForm.name,photo:candForm.photo,desc:candForm.desc,votes:0};upd(selId,{positions:sel.positions.map(p=>p.id===candModal?{...p,candidates:[...(p.candidates||[]),c]}:p)});setCandModal(null);setCandForm({name:'',photo:'',desc:''}); }} disabled={!candForm.name} className="w-full">Add Candidate</Btn>
+        </div>
+      </Modal>}
+    </div>
+  );
+
+  return (
+    <div>
+      <div className="flex justify-between items-center mb-6">
+        <h3 className="text-xl font-bold text-gd">Elections <span className="text-gray-400 font-normal">({elections.length})</span></h3>
+        <Btn onClick={()=>{setCF({title:'',desc:''});setView(view==='create'?'list':'create');}} size="sm"><i className="fa-solid fa-plus"></i>Create Election</Btn>
+      </div>
+      {view==='create'&&<div className="bg-white p-8 rounded-2xl shadow-sm mb-6 border border-gray-100">
+        <div className="space-y-4">
+          <div><label className="block text-xs font-bold text-gray-500 uppercase mb-1">Election Title *</label><input value={cF.title} onChange={e=>setCF({...cF,title:e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3" placeholder="e.g. SSLG Elections 2026"/></div>
+          <div><label className="block text-xs font-bold text-gray-500 uppercase mb-1">Description</label><textarea value={cF.desc} onChange={e=>setCF({...cF,desc:e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3 h-20 resize-none"/></div>
+          <div className="flex gap-3">
+            <Btn onClick={()=>{if(!cF.title)return;const n={id:uid(),title:cF.title,desc:cF.desc,status:'draft',positions:[],voters:[]};setElections([...elections,n]);setSelId(n.id);setView('manage');}} disabled={!cF.title} size="lg" className="flex-1">Create & Setup</Btn>
+            <Btn onClick={()=>setView('list')} variant="ghost" size="lg" className="px-8">Cancel</Btn>
+          </div>
+        </div>
+      </div>}
+      <div className="space-y-4">
+        {elections.map(el=>(
+          <div key={el.id} className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-wrap items-center gap-4 card-hover">
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-3 mb-1"><h4 className="font-bold text-gd truncate font-lora">{el.title}</h4><span className={`text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap ${el.status==='open'?'bg-green-100 text-green-700':el.status==='closed'?'bg-gray-100 text-gray-600':'bg-yellow-100 text-yellow-700'}`}>{el.status?.toUpperCase()}</span></div>
+              <p className="text-sm text-gray-500">{el.positions?.length||0} positions · {el.voters?.length||0} votes</p>
+            </div>
+            <div className="flex gap-2">
+              <Btn onClick={()=>upd(el.id,{status:el.status==='open'?'closed':'open'})} variant={el.status==='open'?'danger':'green'} size="sm">{el.status==='open'?'Close':'Open'}</Btn>
+              <Btn onClick={()=>{setSelId(el.id);setView('manage');}} size="sm">Manage</Btn>
+              <Btn onClick={()=>setElections(elections.filter(e=>e.id!==el.id))} variant="ghost" size="sm"><i className="fa-solid fa-trash text-red-500"></i></Btn>
+            </div>
+          </div>
+        ))}
+        {elections.length===0&&<div className="bg-white rounded-2xl p-14 text-center text-gray-300"><i className="fa-solid fa-ballot text-5xl mb-4 block"></i><p>No elections yet.</p></div>}
+      </div>
+    </div>
+  );
+};
+
+/* ── Admin Accounts ── */
+const AdminAccounts=({accounts,setAccounts})=>{
+  const [modal,setModal]=useState(false);
+  const [form,setForm]=useState({name:'',username:'',password:'',grade:'11',section:''});
+  const [search,setSearch]=useState('');
+  const filtered=accounts.filter(a=>a.name.toLowerCase().includes(search.toLowerCase())||a.username.toLowerCase().includes(search.toLowerCase()));
+  const create=()=>{
+    if(!form.name||!form.username||!form.password)return;
+    if(accounts.find(a=>a.username===form.username)){alert('Username already exists!');return;}
+    setAccounts([...accounts,{id:uid(),...form,active:true,votedElections:[]}]);
+    setModal(false);setForm({name:'',username:'',password:'',grade:'11',section:''});
+  };
+  return (
+    <div>
+      <div className="flex justify-between items-center mb-6">
+        <h3 className="text-xl font-bold text-gd">Student Accounts <span className="text-gray-400 font-normal">({accounts.length})</span></h3>
+        <Btn onClick={()=>setModal(true)} size="sm"><i className="fa-solid fa-user-plus"></i>Create Account</Btn>
+      </div>
+      <div className="relative mb-5"><i className="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i><input value={search} onChange={e=>setSearch(e.target.value)} className="w-full bg-white border border-gray-200 rounded-xl pl-11 pr-4 py-3 shadow-sm" placeholder="Search by name or username..."/></div>
+      <div className="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm min-w-[600px]">
+            <thead className="bg-gray-50 border-b border-gray-100"><tr>{['Name','Username','Grade','Password','Status','Actions'].map(h=><th key={h} className="text-left px-5 py-4 font-bold text-gray-500 text-xs uppercase">{h}</th>)}</tr></thead>
+            <tbody className="divide-y divide-gray-50">
+              {filtered.map(a=>(
+                <tr key={a.id} className="hover:bg-gray-50">
+                  <td className="px-5 py-4"><div className="flex items-center gap-3"><div className="w-8 h-8 bg-g rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">{a.name[0]}</div><span className="font-bold text-gd">{a.name}</span></div></td>
+                  <td className="px-5 py-4 text-gray-600">{a.username}</td>
+                  <td className="px-5 py-4 text-gray-600">Gr.{a.grade}{a.section?`-${a.section}`:''}</td>
+                  <td className="px-5 py-4 text-gray-400 text-xs font-mono">{a.password}</td>
+                  <td className="px-5 py-4"><span className={`text-xs font-bold px-3 py-1 rounded-full ${a.active?'bg-green-100 text-green-700':'bg-red-100 text-red-700'}`}>{a.active?'Active':'Inactive'}</span></td>
+                  <td className="px-5 py-4"><div className="flex gap-2"><Btn onClick={()=>setAccounts(accounts.map(x=>x.id===a.id?{...x,active:!x.active}:x))} variant="ghost" size="sm">{a.active?'Deactivate':'Activate'}</Btn><Btn onClick={()=>setAccounts(accounts.filter(x=>x.id!==a.id))} variant="ghost" size="sm"><i className="fa-solid fa-trash text-red-500 text-xs"></i></Btn></div></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {filtered.length===0&&<div className="p-12 text-center text-gray-300"><i className="fa-solid fa-users text-5xl mb-4 block"></i><p>No accounts found.</p></div>}
+        </div>
+      </div>
+      {modal&&<Modal title="Create Student Account" onClose={()=>setModal(false)}>
+        <div className="space-y-4">
+          <div><label className="block text-xs font-bold text-gray-500 uppercase mb-1">Full Name *</label><input value={form.name} onChange={e=>setForm({...form,name:e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3" placeholder="Juan Dela Cruz"/></div>
+          <div><label className="block text-xs font-bold text-gray-500 uppercase mb-1">Username *</label><input value={form.username} onChange={e=>setForm({...form,username:e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3" placeholder="juandc_gr11"/></div>
+          <div><label className="block text-xs font-bold text-gray-500 uppercase mb-1">Password *</label><input value={form.password} onChange={e=>setForm({...form,password:e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3" placeholder="Set password"/></div>
+          <div className="grid grid-cols-2 gap-4">
+            <div><label className="block text-xs font-bold text-gray-500 uppercase mb-1">Grade</label><select value={form.grade} onChange={e=>setForm({...form,grade:e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3"><option value="11">Grade 11</option><option value="12">Grade 12</option></select></div>
+            <div><label className="block text-xs font-bold text-gray-500 uppercase mb-1">Section</label><input value={form.section} onChange={e=>setForm({...form,section:e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3" placeholder="e.g. Mabini"/></div>
+          </div>
+          <Btn onClick={create} disabled={!form.name||!form.username||!form.password} className="w-full" size="lg">Create Account</Btn>
+        </div>
+      </Modal>}
+    </div>
+  );
+};
+
+/* ── Admin Announcements ── */
+const AdminAnnouncements=({settings,setSettings})=>{
+  const anns=settings.announcements||[];
+  const [modal,setModal]=useState(null);
+  const emptyAnn={text:'',type:'success',active:true,link:''};
+  const [form,setForm]=useState({...emptyAnn});
+
+  const saveAnn=()=>{
+    if(!form.text.trim()) return;
+    if(modal==='add'){
+      const n={...form,id:uid(),ts:Date.now()};
+      setSettings(s=>({...s,announcements:[...(s.announcements||[]),n]}));
+    } else {
+      setSettings(s=>({...s,announcements:(s.announcements||[]).map(a=>a.id===modal.id?{...a,...form}:a)}));
+    }
+    setModal(null);
+  };
+
+  const del=id=>setSettings(s=>({...s,announcements:(s.announcements||[]).filter(a=>a.id!==id)}));
+  const toggle=id=>setSettings(s=>({...s,announcements:(s.announcements||[]).map(a=>a.id===id?{...a,active:!a.active}:a)}));
+
+  const typeColors={success:'bg-green-100 text-green-700',warning:'bg-amber-100 text-amber-700',info:'bg-sky-100 text-sky-700',urgent:'bg-red-100 text-red-700'};
+  const typeLabels={success:'Official',warning:'Advisory',info:'Notice',urgent:'Urgent'};
+
+  return (
+    <div className="max-w-3xl">
+      <div className="flex justify-between items-center mb-6 flex-wrap gap-3">
+        <div>
+          <h3 className="text-xl font-bold text-gd">Announcements <span className="text-gray-400 font-normal">({anns.length})</span></h3>
+          <p className="text-sm text-gray-500 mt-0.5">Manage the announcement bar and announcements page.</p>
+        </div>
+        <div className="flex gap-3 items-center">
+          <div className="flex items-center gap-2 text-sm font-bold text-gray-600">
+            <Toggle on={settings.announcementBar!==false} onToggle={()=>setSettings(s=>({...s,announcementBar:!s.announcementBar}))}/>
+            Bar {settings.announcementBar!==false?'On':'Off'}
+          </div>
+          <Btn onClick={()=>{setForm({...emptyAnn});setModal('add');}} size="sm"><i className="fa-solid fa-plus"></i>Add</Btn>
+        </div>
+      </div>
+
+      {anns.length===0&&<div className="bg-white rounded-2xl p-14 text-center text-gray-300 shadow-sm"><i className="fa-solid fa-bullhorn text-5xl mb-4 block"></i><p>No announcements yet. Click "Add" to create one.</p></div>}
+
+      <div className="space-y-3">
+        {[...anns].reverse().map(a=>(
+          <div key={a.id} className={`bg-white rounded-2xl shadow-sm border border-gray-100 p-5 flex items-center gap-4 ${!a.active?'opacity-60':''}`}>
+            <span className={`text-xs font-bold px-2.5 py-1 rounded-full whitespace-nowrap flex-shrink-0 ${typeColors[a.type]||typeColors.success}`}>{typeLabels[a.type]||'Notice'}</span>
+            <p className="flex-1 text-sm text-gray-700 min-w-0 truncate">{a.text}</p>
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <Toggle on={a.active} onToggle={()=>toggle(a.id)}/>
+              <Btn onClick={()=>{setForm({text:a.text,type:a.type,active:a.active,link:a.link||''});setModal(a);}} variant="ghost" size="sm"><i className="fa-solid fa-pen text-g text-xs"></i></Btn>
+              <Btn onClick={()=>del(a.id)} variant="ghost" size="sm"><i className="fa-solid fa-trash text-red-500 text-xs"></i></Btn>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {modal&&<Modal title={modal==='add'?'New Announcement':'Edit Announcement'} onClose={()=>setModal(null)}>
+        <div className="space-y-4">
+          <div>
+            <label className="block text-xs font-bold text-gray-500 uppercase mb-1">Announcement Text *</label>
+            <textarea value={form.text} onChange={e=>setForm({...form,text:e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3 h-24 resize-none" placeholder="Enter your announcement message..."/>
+          </div>
+          <div>
+            <label className="block text-xs font-bold text-gray-500 uppercase mb-2">Type</label>
+            <div className="grid grid-cols-2 gap-2">
+              {Object.entries(typeLabels).map(([v,l])=>(
+                <button key={v} onClick={()=>setForm({...form,type:v})} className={`py-2.5 px-4 rounded-xl border-2 font-bold text-sm transition-all ${form.type===v?'border-g bg-g/5':'border-gray-200 hover:border-gray-300'}`}>
+                  <span className={`inline-block w-2 h-2 rounded-full mr-2 ${v==='success'?'bg-green-500':v==='warning'?'bg-amber-500':v==='info'?'bg-sky-500':'bg-red-500'}`}></span>{l}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div>
+            <label className="block text-xs font-bold text-gray-500 uppercase mb-1">Link to Page (optional)</label>
+            <select value={form.link||''} onChange={e=>setForm({...form,link:e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3">
+              <option value="">— No link —</option>
+              <option value="admissions">Admissions</option>
+              <option value="programs">Programs</option>
+              <option value="elections">Elections</option>
+              <option value="about">About</option>
+              <option value="contact">Contact</option>
+            </select>
+          </div>
+          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+            <span className="text-sm font-bold">Active (visible on site)</span>
+            <Toggle on={form.active} onToggle={()=>setForm({...form,active:!form.active})}/>
+          </div>
+          <Btn onClick={saveAnn} disabled={!form.text.trim()} className="w-full" size="lg">{modal==='add'?'Publish Announcement':'Save Changes'}</Btn>
+        </div>
+      </Modal>}
+    </div>
+  );
+};
+
+/* ── Admin Appearance ── */
+const AdminAppearance=({settings,setSettings})=>{
+  const [msg,setMsg]=useState('');
+  const showMsg=m=>{setMsg(m);setTimeout(()=>setMsg(''),3000);};
+
+  return (
+    <div className="max-w-2xl space-y-6">
+      <h3 className="text-xl font-bold text-gd">Appearance Settings</h3>
+      {msg&&<div className="bg-green-50 border border-green-200 text-green-700 p-3 rounded-xl text-sm font-bold flex items-center gap-2"><i className="fa-solid fa-check-circle"></i>{msg}</div>}
+
+      {/* Logo Upload */}
+      <div className="bg-white p-7 rounded-2xl shadow-sm">
+        <h4 className="font-bold text-gd mb-1 flex items-center gap-2"><i className="fa-solid fa-image text-g"></i>School Logo</h4>
+        <p className="text-xs text-gray-500 mb-4">Upload your school logo — saved directly in the browser, no external hosting needed.</p>
+        <div className="flex items-center gap-5">
+          <div className="w-20 h-20 rounded-2xl overflow-hidden flex-shrink-0 bg-gray-100 flex items-center justify-center shadow">
+            {settings.logoBase64?<img src={settings.logoBase64} className="w-full h-full object-cover" alt="Logo"/>:<Logo size={80}/>}
+          </div>
+          <div className="space-y-2">
+            <UploadBtn label="Upload Logo Image" accept="image/*" crop aspect={1} onFile={async f=>{const b=typeof f==='string'?f:await compressImg(f,200,.9);setSettings(s=>({...s,logoBase64:b}));showMsg('✓ Logo saved successfully!');}}/>
+            {settings.logoBase64&&<Btn onClick={()=>{setSettings(s=>({...s,logoBase64:null}));showMsg('Logo reset to default.');}} variant="ghost" size="sm"><i className="fa-solid fa-rotate-left text-ga"></i>Reset to Default</Btn>}
+          </div>
+        </div>
+      </div>
+
+      {/* Hero Background */}
+      <div className="bg-white p-7 rounded-2xl shadow-sm">
+        <h4 className="font-bold text-gd mb-1 flex items-center gap-2"><i className="fa-solid fa-panorama text-g"></i>Hero Background</h4>
+        <p className="text-xs text-gray-500 mb-4">Upload an image or enter a video URL for the homepage hero section.</p>
+        <div className="flex gap-2 mb-4">
+          {[['default','Default'],['image','Image'],['video','Video URL']].map(([v,l])=>(
+            <button key={v} onClick={()=>setSettings(s=>({...s,heroBgType:v}))} className={`px-4 py-2 rounded-xl font-bold text-sm transition-all ${settings.heroBgType===v?'bg-g text-white':'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>{l}</button>
+          ))}
+        </div>
+        {settings.heroBgType==='image'&&(
+          <div className="space-y-3">
+            <UploadBtn label="Upload Background Image" accept="image/*" crop aspect={16/9} onFile={async f=>{
+              const b=typeof f==='string'?f:await compressHero(f);
+              setSettings(s=>({...s,heroBgBase64:b}));
+              showMsg('✓ Background image saved!');
+            }} className="w-full justify-center border border-dashed border-g rounded-xl py-4"/>
+            {settings.heroBgBase64&&<div className="rounded-xl overflow-hidden h-40"><img src={settings.heroBgBase64} className="w-full h-full object-cover" alt="BG preview"/></div>}
+            {settings.heroBgBase64&&<Btn onClick={()=>{setSettings(s=>({...s,heroBgBase64:null}));showMsg('Background reset.');}} variant="ghost" size="sm"><i className="fa-solid fa-rotate-left text-ga"></i>Remove Image</Btn>}
+            <p className="text-xs text-gray-400">💡 Tip: Recommended size is 1920×1080px. Large images will be compressed automatically. Use JPEG for best results.</p>
+          </div>
+        )}
+        {settings.heroBgType==='video'&&(
+          <div className="space-y-3">
+            <input value={settings.heroBgVideoUrl||''} onChange={e=>setSettings(s=>({...s,heroBgVideoUrl:e.target.value}))} className="w-full border border-gray-200 rounded-xl px-4 py-3" placeholder="Paste a direct video URL (mp4, webm)..."/>
+            <p className="text-xs text-gray-400">💡 Tip: You can upload your MESHS grounds video to Google Drive, set it public, and use services like <a href="https://drive.google.com" target="_blank" className="text-g underline">Google Drive</a> or use a direct .mp4 link.</p>
+            {settings.heroBgVideoUrl&&<Btn onClick={()=>showMsg('Video URL saved — it will be used on the homepage.')} size="sm">Preview Active</Btn>}
+          </div>
+        )}
+        {settings.heroBgType==='default'&&<div className="bg-gray-50 rounded-xl p-4 text-gray-500 text-sm">Using the default MESHS-style background image.</div>}
+      </div>
+
+      {/* Admissions Toggle */}
+      <div className="bg-white p-7 rounded-2xl shadow-sm">
+        <h4 className="font-bold text-gd mb-4 flex items-center gap-2"><i className="fa-solid fa-door-open text-g"></i>Admissions Portal</h4>
+        <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
+          <div><p className="font-bold">Admissions Status</p><p className="text-sm text-gray-500">{settings.admissionsOpen?'Open — accepting applicants':'Closed'}</p></div>
+          <Toggle on={settings.admissionsOpen} onToggle={()=>setSettings(s=>({...s,admissionsOpen:!s.admissionsOpen}))}/>
+        </div>
+        <div className="mt-4">
+          <label className="block text-xs font-bold text-gray-500 uppercase mb-1">Application Form Link</label>
+          <input value={settings.applyLink||''} onChange={e=>setSettings(s=>({...s,applyLink:e.target.value}))} className="w-full border border-gray-200 rounded-xl px-4 py-3 mt-1" placeholder="https://forms.google.com/..."/>
+          <p className="text-xs text-gray-400 mt-1">Students click "Apply Here!" and go to this link.</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/* ── Admin Site Text ── */
+const AdminSiteText=({settings,setSettings})=>{
+  const t=settings.siteText||DEFAULT_TEXT;
+  const upT=(k,v)=>setSettings(s=>({...s,siteText:{...(s.siteText||DEFAULT_TEXT),[k]:v}}));
+  const [saved,setSaved]=useState(false);
+  const saveST=()=>{setSaved(true);setTimeout(()=>setSaved(false),2500);};
+  const TField=({k,label,multi=false})=>(
+    <div>
+      <label className="block text-xs font-bold text-gray-500 uppercase mb-1">{label}</label>
+      {multi?<textarea value={t[k]||''} onChange={e=>upT(k,e.target.value)} className="w-full border border-gray-200 rounded-xl px-4 py-3 h-24 resize-none" />
+        :<input value={t[k]||''} onChange={e=>upT(k,e.target.value)} className="w-full border border-gray-200 rounded-xl px-4 py-3"/>}
+    </div>
+  );
+  return (
+    <div className="max-w-2xl space-y-6">
+      <div className="flex justify-between items-center">
+        <h3 className="text-xl font-bold text-gd">Edit Site Text</h3>
+        <Btn onClick={saveST} size="sm" variant={saved?'ghost':'green'}>{saved?<span><i className="fa-solid fa-check mr-1"></i>Saved!</span>:'Save All'}</Btn>
+      </div>
+      {saved&&<div className="bg-green-50 border border-green-200 text-green-700 p-3 rounded-xl text-sm font-bold flex items-center gap-2"><i className="fa-solid fa-check-circle"></i>All site text saved successfully!</div>}
+      <div className="bg-white p-7 rounded-2xl shadow-sm space-y-4">
+        <h4 className="font-bold text-gd border-b pb-3 font-lora">Hero Section</h4>
+        <TField k="heroEst" label="Est. Tag (e.g. Est. 2016 · Makati City)"/>
+        <TField k="heroTitle" label="Main Hero Title" multi/>
+        <TField k="heroTagline" label="Tagline/Motto"/>
+      </div>
+      <div className="bg-white p-7 rounded-2xl shadow-sm space-y-4">
+        <h4 className="font-bold text-gd border-b pb-3 font-lora">Statistics Bar</h4>
+        <div className="grid grid-cols-2 gap-4">
+          <TField k="stat1Val" label="Stat 1 Value"/><TField k="stat1Lbl" label="Stat 1 Label"/>
+          <TField k="stat2Val" label="Stat 2 Value"/><TField k="stat2Lbl" label="Stat 2 Label"/>
+          <TField k="stat3Val" label="Stat 3 Value"/><TField k="stat3Lbl" label="Stat 3 Label"/>
+          <TField k="stat4Val" label="Stat 4 Value"/><TField k="stat4Lbl" label="Stat 4 Label"/>
+        </div>
+      </div>
+      <div className="bg-white p-7 rounded-2xl shadow-sm space-y-4">
+        <h4 className="font-bold text-gd border-b pb-3 font-lora">Why MESHS Section</h4>
+        <TField k="whyTitle" label="Section Label"/><TField k="whyBody" label="Body Text" multi/>
+        <div className="grid grid-cols-2 gap-4"><TField k="feat1" label="Feature 1"/><TField k="feat2" label="Feature 2"/><TField k="feat3" label="Feature 3"/><TField k="feat4" label="Feature 4"/></div>
+      </div>
+      <div className="bg-white p-7 rounded-2xl shadow-sm space-y-4">
+        <h4 className="font-bold text-gd border-b pb-3 font-lora">About Page</h4>
+        <TField k="aboutTitle" label="Page Title"/><TField k="aboutSub" label="Subtitle (e.g. Established 2016)"/>
+        <TField k="aboutBody" label="Main Body" multi/><TField k="philosophy" label="Core Philosophy Quote"/>
+        <TField k="aboutBody2" label="Closing Paragraph" multi/>
+      </div>
+      <div className="bg-white p-7 rounded-2xl shadow-sm space-y-4">
+        <h4 className="font-bold text-gd border-b pb-3 font-lora">Admissions</h4>
+        <TField k="admissionsTagline" label="Tagline"/><TField k="enrollPeriod" label="School Year"/><TField k="enrollDates" label="Enrollment Dates"/>
+      </div>
+      <div className="bg-white p-7 rounded-2xl shadow-sm space-y-4">
+        <h4 className="font-bold text-gd border-b pb-3 font-lora">Footer</h4>
+        <TField k="footerCopy" label="Copyright Text"/>
+      </div>
+      <Btn onClick={saveST} size="lg" className="w-full">{saved?'✓ All Changes Saved!':'Save All Site Text'}</Btn>
+    </div>
+  );
+};
+
+/* ── Admin Email & Contact ── */
+const AdminEmailContact=({settings,setSettings})=>{
+  const t=settings.siteText||DEFAULT_TEXT;
+  const upT=(k,v)=>setSettings(s=>({...s,siteText:{...(s.siteText||DEFAULT_TEXT),[k]:v}}));
+  const [saved,setSaved]=useState(false);
+  return (
+    <div className="max-w-2xl space-y-6">
+      <h3 className="text-xl font-bold text-gd">Email & Contact Settings</h3>
+      {saved&&<div className="bg-green-50 border border-green-200 text-green-700 p-3 rounded-xl text-sm font-bold flex items-center gap-2"><i className="fa-solid fa-check-circle"></i>Saved!</div>}
+      <div className="bg-white p-7 rounded-2xl shadow-sm space-y-5">
+        <div>
+          <label className="block text-xs font-bold text-gray-500 uppercase mb-1">School Email Address *</label>
+          <input value={t.contactEmail||''} onChange={e=>upT('contactEmail',e.target.value)} className="w-full border border-gray-200 rounded-xl px-4 py-3" placeholder="meshs.official@deped.gov.ph"/>
+          <p className="text-xs text-gray-400 mt-1">When visitors submit the contact form, their message is composed and sent to this email via their email app.</p>
+        </div>
+        <div><label className="block text-xs font-bold text-gray-500 uppercase mb-1">Phone Number</label><input value={t.contactPhone||''} onChange={e=>upT('contactPhone',e.target.value)} className="w-full border border-gray-200 rounded-xl px-4 py-3" placeholder="(02) 8888-1234"/></div>
+        <div><label className="block text-xs font-bold text-gray-500 uppercase mb-1">School Address</label><textarea value={t.contactAddr||''} onChange={e=>upT('contactAddr',e.target.value)} className="w-full border border-gray-200 rounded-xl px-4 py-3 h-20 resize-none"/></div>
+        <div><label className="block text-xs font-bold text-gray-500 uppercase mb-1">Contact Section Title</label><input value={t.contactTitle||''} onChange={e=>upT('contactTitle',e.target.value)} className="w-full border border-gray-200 rounded-xl px-4 py-3"/></div>
+        <div><label className="block text-xs font-bold text-gray-500 uppercase mb-1">Contact Section Description</label><textarea value={t.contactDesc||''} onChange={e=>upT('contactDesc',e.target.value)} className="w-full border border-gray-200 rounded-xl px-4 py-3 h-20 resize-none"/></div>
+        <Btn onClick={()=>{setSaved(true);setTimeout(()=>setSaved(false),2500);}} size="lg" className="w-full">Save Contact Settings</Btn>
+      </div>
+      <div className="bg-amber-50 border border-amber-200 p-5 rounded-2xl text-sm text-amber-800">
+        <p className="font-bold mb-2"><i className="fa-solid fa-info-circle mr-2"></i>How Email Works</p>
+        <p>When a visitor clicks "Send Message" on the Contact page, their device opens its email app (like Gmail, Outlook) pre-filled with the message addressed to the school email above. For fully automated server-side email, contact a web developer to set up a backend service.</p>
+      </div>
+    </div>
+  );
+};
+
+/* ════════════════════════════════════════
+   GALLERY PAGE
+════════════════════════════════════════ */
+const GalleryPage=({settings,setSettings,isAdmin})=>{
+  const [filter,setFilter]=useState('all');
+  const [lightboxSrc,setLightboxSrc]=useState(null);
+  const gallery=settings.gallery||INIT_GALLERY;
+  const setGallery=items=>setSettings(s=>({...s,gallery:items}));
+  const cats=[...new Set(['all',...gallery.map(g=>g.cat)])];
+  const shown=filter==='all'?gallery:gallery.filter(g=>g.cat===filter);
+
+  const addPhotos=async(files)=>{
+    const arr=Array.isArray(files)?files:[files];
+    const news=arr.map(b=>({id:uid(),src:b,cat:'School Life',caption:''}));
+    setGallery([...gallery,...news]);
+  };
+
+  return(
+    <div className="pt-8 pb-24 bg-gray-50 min-h-screen">
+      {lightboxSrc&&(
+        <div className="fixed inset-0 z-[999] bg-black/92 flex items-center justify-center p-4" onClick={()=>setLightboxSrc(null)}>
+          <img src={lightboxSrc} className="max-h-[90vh] max-w-[90vw] rounded-xl shadow-2xl lb-img" alt="Gallery"/>
+          <button className="absolute top-5 right-5 w-11 h-11 rounded-full bg-white/20 text-white text-xl flex items-center justify-center hover:bg-white/30 transition-colors">✕</button>
+        </div>
+      )}
+      <div className="container mx-auto px-6">
+        <div className="pt-8">
+          <SH title="Photo Gallery" subtitle="Capturing the spirit of every Estrellian"/>
+        </div>
+        {/* Category filters */}
+        <div className="flex flex-wrap gap-3 justify-center mb-10">
+          {cats.map(c=>(
+            <button key={c} onClick={()=>setFilter(c)} className={`px-5 py-2 rounded-full font-bold text-sm transition-all ${filter===c?'bg-g text-white shadow-lg':'bg-white text-gray-600 hover:bg-gray-100 shadow-sm'}`}>{c==='all'?'All Photos':c}</button>
+          ))}
+        </div>
+        {isAdmin&&(
+          <div className="flex justify-center mb-8">
+            <UploadBtn label="Add Photos to Gallery" icon="fa-camera" multiple onFile={addPhotos} className="bg-g text-white px-6 py-3 rounded-xl shadow-lg hover:bg-gd"/>
+          </div>
+        )}
+        {shown.length===0&&<div className="text-center py-24 text-gray-300"><i className="fa-solid fa-images text-6xl mb-4 block float"></i><p className="text-xl">No photos yet.</p>{isAdmin&&<p className="text-sm mt-2">Upload photos using the button above.</p>}</div>}
+        <div className="columns-2 md:columns-3 lg:columns-4 gap-3 space-y-3">
+          {shown.map((g,i)=>(
+            <R key={g.id} delay={i*40}>
+              <div className="relative group rounded-xl overflow-hidden break-inside-avoid cursor-pointer shadow-sm hover:shadow-xl transition-all" onClick={()=>setLightboxSrc(g.src)}>
+                <img src={g.src} className="w-full object-cover group-hover:scale-105 transition-transform duration-500" alt={g.caption||'Gallery'}/>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+                  {g.caption&&<p className="text-white text-xs font-bold">{g.caption}</p>}
+                </div>
+                {isAdmin&&<button onClick={e=>{e.stopPropagation();setGallery(gallery.filter(x=>x.id!==g.id));}} className="absolute top-2 right-2 w-8 h-8 bg-red-500/80 text-white rounded-full flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600"><i className="fa-solid fa-trash"></i></button>}
+              </div>
+            </R>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/* ════════════════════════════════════════
+   MAIN APP
+════════════════════════════════════════ */
+const App=()=>{
+  const [page,setPage]=useState('home');
+  const [pageKey,setPageKey]=useState(0);
+  const [isAdmin,setIsAdmin]=useState(()=>ls('meshsAdminSess',false));
+  const [student,setStudent]=useState(()=>ls('meshsStudentSess',null));
+  const [settings,setSettingsRaw]=useState(()=>ls('meshsSettings2',{...DEFAULT_SETTINGS}));
+  const [clubs,setClubsRaw]=useState(()=>ls('meshsClubs2',INIT_CLUBS));
+  const [seminars,setSeminarsRaw]=useState(()=>ls('meshsSeminars2',INIT_SEMINARS));
+  const [elections,setElectionsRaw]=useState(()=>ls('meshsElections2',[]));
+  const [accounts,setAccountsRaw]=useState(()=>ls('meshsAccounts2',[]));
+
+  // ── LIVE SYNC ENGINE ──────────────────────────────────────────────────────
+  // 1. On mount  : fetch Firebase once (initial load)
+  // 2. Polling   : every 5 s check _version; if changed, pull all data
+  //                → all phones/tabs update automatically
+  // 3. On change : save to localStorage instantly + Firebase debounced (1.5s)
+  //                + bump _version so every other device re-fetches
+  // ─────────────────────────────────────────────────────────────────────────
+  const mounted=useRef(false);
+
+  // The live-poll callback — called whenever Firebase has newer data
+  const applyCloudData=useCallback(({settings:cs,clubs:cc,seminars:csm,elections:cel,accounts:cac})=>{
+    if(cs!=null){setSettingsRaw(cs);ss('meshsSettings2',cs);}
+    if(cc!=null){setClubsRaw(cc);ss('meshsClubs2',cc);}
+    if(csm!=null){setSeminarsRaw(csm);ss('meshsSeminars2',csm);}
+    if(cel!=null){setElectionsRaw(cel);ss('meshsElections2',cel);}
+    if(cac!=null){setAccountsRaw(cac);ss('meshsAccounts2',cac);}
+  },[]);
+
+  useEffect(()=>{
+    if(!isCloud()){mounted.current=true;return;}
+    setSyncState('loading');
+    // Initial full fetch
+    fbFetchAll().then(data=>{
+      applyCloudData(data);
+      setSyncState('live');
+      mounted.current=true;
+      // Start live polling so all devices stay in sync
+      fbStartPolling(applyCloudData);
+    }).catch(()=>{
+      setSyncState('error');
+      mounted.current=true;
+    });
+    return()=>fbStopPolling();
+  },[]);
+
+  // Session-only (no cloud)
+  useEffect(()=>{ss('meshsAdminSess',isAdmin);},[isAdmin]);
+  useEffect(()=>{ss('meshsStudentSess',student);},[student]);
+
+  // Hybrid save — localStorage instantly, Firebase debounced
+  useEffect(()=>{ss('meshsSettings2',settings);if(mounted.current)fbSave('meshsSettings2',settings);},[settings]);
+  useEffect(()=>{ss('meshsClubs2',clubs);if(mounted.current)fbSave('meshsClubs2',clubs);},[clubs]);
+  useEffect(()=>{ss('meshsSeminars2',seminars);if(mounted.current)fbSave('meshsSeminars2',seminars);},[seminars]);
+  useEffect(()=>{ss('meshsElections2',elections);if(mounted.current)fbSave('meshsElections2',elections);},[elections]);
+  useEffect(()=>{ss('meshsAccounts2',accounts);if(mounted.current)fbSave('meshsAccounts2',accounts);},[accounts]);
+
+  // Direct setters — useEffect above handles all saving automatically
+  const setSettings=setSettingsRaw;
+  const setClubs=setClubsRaw;
+  const setSeminars=setSeminarsRaw;
+  const setElections=setElectionsRaw;
+  const setAccounts=setAccountsRaw;
+
+  const nav=p=>{window.scrollTo({top:0,behavior:'smooth'});setPage(p);setPageKey(k=>k+1);};
+
+  const onAdminLogin=()=>{setIsAdmin(true);nav('admin');};
+  const onAdminLogout=()=>{setIsAdmin(false);nav('home');};
+  const onStudentLogin=(username,password)=>{
+    const acc=accounts.find(a=>a.username===username&&a.password===password&&a.active);
+    if(acc){setStudent({userId:acc.id,username:acc.username,name:acc.name});nav('elections');return true;}
+    return false;
+  };
+  const onStudentLogout=()=>{setStudent(null);nav('home');};
+  const onVote=(elId,votes)=>{
+    if(!student)return;
+    setElections(elections.map(el=>{
+      if(el.id!==elId||el.voters?.includes(student.userId))return el;
+      return{...el,positions:el.positions.map(p=>{const cid=votes[p.id];if(!cid)return p;return{...p,candidates:p.candidates.map(c=>c.id===cid?{...c,votes:(c.votes||0)+1}:c)};}),voters:[...(el.voters||[]),student.userId]};
+    }));
+  };
+
+  const renderPage=()=>{
+    const common={settings,setSettings,isAdmin};
+    switch(page){
+      case 'home': return <Home nav={nav} {...common}/>;
+      case 'programs': return <Programs clubs={clubs} seminars={seminars} settings={settings}/>;
+      case 'careerpaths': return <CareerPathsPage/>;
+      case 'admissions': return <Admissions settings={settings}/>;
+      case 'announcements': return <AnnouncementsPage settings={settings}/>;
+      case 'gallery': return <GalleryPage settings={settings} setSettings={setSettings} isAdmin={isAdmin}/>;
+      case 'elections': return <ElectionsPage elections={elections} student={student} onLoginRedirect={()=>nav('login')} onVote={onVote}/>;
+      case 'about': return <About {...common}/>;
+      case 'contact': return <Contact {...common}/>;
+      case 'login': return <LoginPage onAdminLogin={onAdminLogin} onStudentLogin={onStudentLogin}/>;
+      case 'admin': return isAdmin
+        ?<AdminDashboard onLogout={onAdminLogout} settings={settings} setSettings={setSettings} clubs={clubs} setClubs={setClubs} seminars={seminars} setSeminars={setSeminars} elections={elections} setElections={setElections} accounts={accounts} setAccounts={setAccounts}/>
+        :<LoginPage onAdminLogin={onAdminLogin} onStudentLogin={onStudentLogin}/>;
+      default: return <Home nav={nav} {...common}/>;
+    }
+  };
+
+  return (
+    <div className="flex flex-col min-h-screen">
+      <div className="sticky top-0 z-50">
+        <AnnouncementBar settings={settings} nav={nav}/>
+        <Navbar page={page} nav={nav} isAdmin={isAdmin} student={student} onStudentLogout={onStudentLogout} settings={settings}/>
+      </div>
+      <main className="flex-grow">
+        <div key={pageKey} className="page-enter">{renderPage()}</div>
+      </main>
+      {student&&(
+        <div className="fixed bottom-5 right-5 z-50 bg-gd text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 border border-white/10 badge-pop">
+          <div className="w-9 h-9 bg-g rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">{student.name[0]}</div>
+          <div><p className="font-bold text-sm leading-tight">{student.name}</p><button onClick={onStudentLogout} className="text-xs text-gray-400 hover:text-white transition-colors">Sign out</button></div>
+        </div>
+      )}
+      <Footer nav={nav} settings={settings}/>
+      <SyncBadge/>
+    </div>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
